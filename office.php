@@ -69,10 +69,10 @@
 										<td>lorem ipsum dolor</td>
 										<td>Oct 29</td>
 										<td class="action-icons">
-												<a href="#"><img src="img/view-icon.png" title="View">
-												<a href="#"><img src="img/reply-ico.png" title="Reply">
-												<a href="#"><img src="img/finish-icon.png" title="Finish">
-												<a href="#"><img src="img/delete-ico.png" title="Delete">
+												<a href="#"><img src="img/view-icon.png" title="View"></a>
+												<a href="#"><img src="img/reply-ico.png" title="Reply"></a>
+												<a href="#"><img src="img/finish-icon.png" title="Finish"></a>
+												<a href="#"><img src="img/delete-ico.png" title="Delete"></a>
 												</td>
 										<td><div class="status"><p>Pending</p></div></td>
 
@@ -86,9 +86,8 @@
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="createdocu.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>create document</p></a></li>
-							<li><a href="assigneddocu.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>assigned document</p></a></li>
-							<li><a href="office.php"><img src="img/manage-user-icon.png" alt="manage-user-icon"><p>in your office</p></a></li>
+							<li><a href="adddocument.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
 							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
 						</ul>
 					</div>
