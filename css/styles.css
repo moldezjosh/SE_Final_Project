@@ -334,7 +334,6 @@ body {
 	color: rgb(255,153,0);
 	background-color: rgb(255,254,159);
 	padding: 13px;
-	text-transform: capitalize;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	margin: 0px;
@@ -342,23 +341,27 @@ body {
 
 .user-menus {nmargin-top: 10px;}
 .search-document { margin: 10px;}
-.result { padding: 30px;}
 
-.result h2 {
+.docu-setting h2 {
+	background-color: rgb(255,153,0);
+	color: white;
 	font-size: 15px;
-	text-transform: capitalize;
-	color: #666666;
+	padding: 8px 8px;
+	display: inline;
 }
 
-.result span { color: #333333;}
-.result-div .user-header {background-color: #fffe9f;}
-.result-div .user-header:hover {background-color: #fffe9f;}
-.result-div .user-header th {color: #ff9900;}
-.result-div table{nmargin: 0 auto; width: 95%;}
-.create-docu { margin: 10px 40px;}
-.create-docu label { text-transform: capitalize; }
-.create-docu input[type=text], .create-docu select, .create-docu textarea { margin: 10px 0; }
-.btnBrowse {margin-left: 10px;}
+.docu-setting a {
+	text-decoration: none;
+	color: white;
+}
+
+.transact-table {
+	width: 98%;
+}
+
+.transact-div td {
+	text-align: center;
+}
 
 .docu-code h2 {
 	font-size: 20px;
@@ -382,12 +385,14 @@ body {
 	height: 100%;
 }
 
+.det-br th { text-align: left;}
+
 .view-docu th {
 	text-transform: capitalize;
 	color: white;
 	background-color: rgb(255,153,0);
 	padding: 5px;
-	text-align: left;
+
 	font-size: 13px;
 	width: 120px;
 }
@@ -401,7 +406,7 @@ body {
 .view-docu tr:nth-child(even) {background-color: #f2f2f2;}
 
 .attachment { width: 280px; height: 100%; margin-left: 20px;}
-.attachment th {text-align: center;}
+
 .at-br {
 	border: 2px solid rgb(255,254,159);
 	width: 99%;
