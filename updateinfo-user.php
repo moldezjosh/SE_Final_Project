@@ -1,3 +1,9 @@
+<?php
+
+require_once 'update-info.php';
+?>
+
+
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
@@ -27,9 +33,9 @@
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn">User</button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="assigneddocu.php">My Menus</a>
+					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -44,34 +50,39 @@
 					<td class="am-display" rowspan="2" valign="top">
             <h3 class="nav-header">update information</h3>
               <div class="menu-display" style="height: 350px">
-								<form>
+								<form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 									<table class="update-info">
 										<tr height="70" valign="bottom">
 												<td class="update-td">Username</td>
 												<td class="update-textbox">
-														<input type="text" name="username"/>
+														<input type="text" name="username" value="<?php echo $username; ?>"/><br>
+														<span class="help-block"><?php echo $username_err;?></span>
 												</td>
 										</tr>
 										<tr height="60">
 											<td class="update-td">Email</td>
 											<td class="update-textbox">
-													<input type="text" name="email"/>
+													<input type="text" name="email" value="<?php echo $email; ?>"/><br>
+													<span class="help-block"><?php echo $email_err;?></span>
 											</td>
 										</tr>
 										<tr height="60">
 											<td class="update-td">Fullname</td>
 											<td class="update-textbox">
-													<input type="text" name="fullname"/>
+													<input type="text" name="name" value="<?php echo $name; ?>"/><br>
+													<span class="help-block"><?php echo $name_err;?></span>
 											</td>
 										</tr>
 										<tr height="70" valign="top">
 											<td class="update-td">Position</td>
 											<td class="update-textbox">
-													<input type="text" name="position"/>
+													<input type="text" name="position" value="<?php echo $position; ?>"/><br>
+													<span class="help-block"><?php echo $position_err;?></span>
 											</td>
 										</tr>
 									</table>
 
+									<input type="hidden" name="id" value="<?php echo $id; ?>"/>
 									<center>
 									<div class="update-in-pass">
 									<input type="submit" name="btnSave" class="btnOk" value="Update" />
@@ -84,9 +95,8 @@
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="createdocu.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>create document</p></a></li>
-							<li><a href="assigneddocu.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>assigned document</p></a></li>
-							<li><a href="office.php"><img src="img/manage-user-icon.png" alt="manage-user-icon"><p>in your office</p></a></li>
+							<li><a href="adddocument.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
 							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
 						</ul>
 					</div>
