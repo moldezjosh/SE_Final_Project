@@ -27,7 +27,7 @@
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn">User</button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="assigneddocu.php">My Menus</a>
+					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
           <a href="login.php">Logout</a>
         </div>
