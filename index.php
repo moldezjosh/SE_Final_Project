@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: login.php");
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
@@ -25,11 +36,11 @@
       </form>
 
       <div class="dropdown">
-        <button onclick="dropFunc()" class="dropbtn">Admin</button>
+        <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
           <a href="index.php">Dashboard</a>
           <a href="usersetting.php">My Menus</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>
