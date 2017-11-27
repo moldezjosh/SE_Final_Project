@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+require_once 'include/update-pass.php';
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
@@ -25,11 +31,11 @@
       </form>
 
       <div class="dropdown">
-        <button onclick="dropFunc()" class="dropbtn">User</button>
+        <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="assigneddocu.php">My Menus</a>
+					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -44,29 +50,33 @@
 					<td class="am-display" rowspan="2" valign="top">
 						<h3 class="nav-header">update password</h3>
 							<div class="menu-display" style="height: 350px">
-								<form>
+								<form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 									<table class="update-info">
 										<tr height="80" class="curr-pass">
 												<td class="update-td">Current Password</td>
 												<td class="update-textbox">
-														<input type="text" name="username"/>
+														<input type="password" name="password" value=""/><br>
+														<span class="help-block"><?php echo $password_err;?></span>
 												</td>
 										</tr>
 
 										<tr height="80">
 											<td class="update-td">New Password</td>
 											<td class="update-textbox">
-													<input type="text" name="email"/>
+													<input type="password" name="new_password" value=""/><br>
+													<span class="help-block"><?php echo $new_password_err;?></span>
 											</td>
 										</tr>
 									<tr height="80" valign="top">
 											<td class="update-td">Repeat New Password</td>
 											<td class="update-textbox">
-													<input type="text" name="fullname"/>
+													<input type="password" name="confirm_password" value=""/><br>
+													<span class="help-block"><?php echo $confirm_password_err;?></span>
 											</td>
 										</tr>
 
 									</table>
+									<input type="hidden" name="id" value="<?php echo $id; ?>"/>
 									<center>
 									<div class="update-in-pass">
 									<input type="submit" name="btnSave" class="btnOk" value="Update" />
@@ -80,9 +90,8 @@
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="createdocu.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>create document</p></a></li>
-							<li><a href="assigneddocu.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>assigned document</p></a></li>
-							<li><a href="office.php"><img src="img/manage-user-icon.png" alt="manage-user-icon"><p>in your office</p></a></li>
+							<li><a href="adddocument.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
 							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
 						</ul>
 					</div>
