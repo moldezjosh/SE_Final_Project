@@ -1,9 +1,19 @@
+<?php
+// Initialize the session
+session_start();
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: login.php");
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
   <script type="text/javascript" src="js/scripts.js"></script>
-
 </head>
 <body>
 	<header>
@@ -25,11 +35,11 @@
       </form>
 
       <div class="dropdown">
-        <button onclick="dropFunc()" class="dropbtn">User</button>
+        <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
 					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -39,6 +49,12 @@
 				<div class="docu-code">
 					<h2>2017-DTS-IN01 <span>Processing</span></h2>
 				</div>
+
+				<div class="docu-setting">
+					<h2>Release this document</h2>
+					<h2><a href="documents.php">Back</a></h2>
+				</div>
+
 				<table>
 					<tr>
 						<td>
@@ -46,27 +62,51 @@
 				  <h3 class="nav-header">document details</h3>
 						<div class="det-br">
 							<table>
-								<tr>
-									<th>document type</th>
-										<td>Request</td>
-								</tr>
-								<tr>
-									<th>delivery method</th>
-										<td>Email</td>
-								</tr>
-								<tr>
-									<th>details</th>
-										<td>From: Angelina Jolie of Department of Energy. This is a sample document</td>
-								</tr>
-								<tr>
-									<th>recipient</th>
-										<td>Mary Elisse Gonzales - Finance Division</td>
-								</tr>
-								<tr>
-									<th>deadline</th>
-										<td>11/28/2017</td>
-								</tr>
-							</table>
+								<?php
+								// Include config file
+							require_once 'include/config.php';
+							  $docu_id =  trim($_GET["docu_id"]);
+
+								// Attempt select query execution
+								$sql = "SELECT * FROM document WHERE docu_id='$docu_id'";
+								if($result = mysqli_query($link, $sql)){
+										if(mysqli_num_rows($result) > 0) {
+												while($row = mysqli_fetch_array($result)){
+													?>
+															<tr>
+																<th>document type</th>
+																	<td><?php echo $row['docu_type']; ?></td>
+															</tr>
+															<tr>
+																<th>delivery method</th>
+																	<td><?php echo $row['deli_type']; ?></td>
+															</tr>
+															<tr>
+																<th>details</th>
+																	<td>From: <?php echo $row['sender_name']; ?> of <?php echo $row['sender_address']; ?>. <?php echo $row['details']; ?></td>
+															</tr>
+															<tr>
+																<th>recipient</th>
+																	<td><?php echo $row['recipient']; ?></td>
+															</tr>
+															<tr>
+																<th>deadline</th>
+																	<td><?php echo $row['deadline']; ?></td>
+															</tr>
+													</table>
+													<?php
+												}
+												mysqli_free_result($result);
+										} else {
+												//echo "<p class='lead'><em>No document(s) were found.</em></p>";
+											}
+										} else{
+												echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+										}
+
+								// Close connection
+								mysqli_close($link);
+													 ?>
 						</div>
 				</div>
 			</td>
@@ -86,19 +126,37 @@
 										 <a href="#"><img src="img/delete-ico.png" title="Delete"></a><center>
 										 </td>
 							 </tr>
-							 <tr>
-								 <td>Another_Docu.pdf</td>
-								 <td class="action-icons"><center>
-										 <a href="#"><img src="img/view-icon.png" title="View"></a>
-										 <a href="#"><img src="img/delete-ico.png" title="Delete"></a><center>
-										 </td>
-							 </tr>
 						 </table>
 					 </div>
 				 </div>
 			</td>
 		</tr>
 	</table>
+
+			<div class="transact-div">
+				 <h3 class="nav-header">transactions</h3>
+				 <div>
+				<table class="transact-table">
+					<tr>
+						<th>Date and Time</th>
+						<th>Location</th>
+						<th>Person in Charge</th>
+						<th>Route</th>
+						<th>Remarks</th>
+						<th>Duration</th>
+					</tr>
+					<tr>
+						<td>27/11/2017-9:01 PM</td>
+						<td>KMD</td>
+						<td>Mary Elisse Gonzales</td>
+						<td>N/A</td>
+						<td>Received</td>
+						<td>N/A</td>
+					</tr>
+				</table>
+			</div>
+			</div>
+
 
 </div>
       </div>

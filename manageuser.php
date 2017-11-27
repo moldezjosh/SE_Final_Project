@@ -1,6 +1,11 @@
 <?php
 	session_start();
-	//require_once 'include/delete.php';
+
+	// If session variable is not set it will redirect to login page
+	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+	  header("location: login.php");
+	  exit;
+	}
 ?>
 <!DOCTYPE html>
 <head>

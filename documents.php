@@ -1,3 +1,14 @@
+<?php
+	session_start();
+
+
+	// If session variable is not set it will redirect to login page
+	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+	  header("location: login.php");
+	  exit;
+	}
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
@@ -25,11 +36,11 @@
       </form>
 
       <div class="dropdown">
-        <button onclick="dropFunc()" class="dropbtn">User</button>
+        <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
 					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -38,7 +49,7 @@
       <table>
         <tr>
           <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, user</h3>
+            <h3 class="user-pic-label"><span>welcome</span>, <?php echo $_SESSION['username']; ?></h3>
           		<img src="img/minda-logo.png" alt="user-profile-pic">
           </td>
           <td class="am-display" rowspan="2" valign="top">
@@ -55,18 +66,38 @@
 										<th>Status</th>
 										<th>Action</th>
 									</tr>
-									<tr class="user-data">
-										<td>2017-DTS-IN01</td>
-										<td>Request</td>
-										<td>From: Joshua Mark Moldez</td>
-										<td>Mary Elisse Gonzales</td>
-										<td>11/26/2017- 10:13 PM</td>
-										<td>Pending</td>
-										<td class="action-icons">
-												<a href="viewdocu.php"><img src="img/view-icon.png" title="View"></a>
-												<a href="#"><img src="img/delete-ico.png" title="Delete"></a>
-												</td>
-									</tr>
+									<?php
+									// Include config file
+								require_once 'include/config.php';
+
+									// Attempt select query execution
+									$sql = "SELECT * FROM document";
+									if($result = mysqli_query($link, $sql)){
+											if(mysqli_num_rows($result) > 0) {
+													while($row = mysqli_fetch_array($result)){
+																	echo "<tr class='user-data'>";
+																	echo "<td>" . $row['docu_code'] . "</td>";
+																	echo "<td>" . $row['docu_type'] . "</td>";
+																	echo "<td>". $row['sender_name'] . "</td>";
+																	echo "<td>". $row['recipient'] ."</td>";
+																	echo "<td>". $row['dateAdded'] ."</td>";
+																	echo "<td>Pending</td>";
+																	echo "<td class='action-icons'>
+																			<a href='viewdocu.php?docu_id=". $row['docu_id'] ."'><img src='img/view-icon.png' title='View'></a>
+																			<a href='#'><img src='img/delete-ico.png' title='Delete'></a>
+																			</td>";
+																echo "</tr>";
+															}
+														mysqli_free_result($result);
+													} else {
+																							//echo "<p class='lead'><em>No document(s) were found.</em></p>";
+														}
+										} else{
+												echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+											}
+												// Close connection
+												mysqli_close($link);
+										?>
 								</table>
 
               </div>
