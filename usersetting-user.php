@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: login.php");
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
@@ -25,11 +36,11 @@
       </form>
 
       <div class="dropdown">
-        <button onclick="dropFunc()" class="dropbtn">User</button>
+        <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="assigneddocu.php">My Menus</a>
+					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -44,29 +55,54 @@
           <td class="am-display" rowspan="2" valign="top">
             <h3 class="nav-header">user information</h3>
               <div class="menu-display" style="height: 350px">
-								<table class="user-setting-info">
-									<tr>
-										<td class="user-name">Fullname: </td>
-										<td class="user-info">User</td>
-									</tr>
-									<tr>
-										<td class="user-name">Email: </td>
-										<td class="user-info">user@gmail.com</td>
-									</tr>
-									<tr>
-										<td class="user-name">Position: </td>
-										<td class="user-info">Developer</td>
-									</tr>
-									<tr>
-										<td class="user-name">Office: </td>
-										<td class="user-info">Knowledge Development Division</td>
-									</tr>
-								</table>
+								<?php
+									// Include config file
+									require_once 'include/config.php';
 
-									<center class="update-buttons">
-									<p class="btnUpdate"><a href="updateinfo-user.php">Update Information</a></p>
-									<p class="btnUpdate"><a href="updatepass-user.php">Update Password</a></p>
-									</center>
+
+									// Attempt select query execution
+
+									$user_sess = trim($_SESSION['username']);
+									$sql = "SELECT * FROM users where username='$user_sess'";
+									if($result = mysqli_query($link, $sql)){
+											if(mysqli_num_rows($result) > 0) {
+													echo "<table class='user-setting-info'>";
+															echo "<tr>";
+															echo "<td class='user-name'>Fullname: </td>";
+
+															while($row = mysqli_fetch_array($result)){
+																			echo "<td class='user-info'>" . $row['name'] . "</td>";
+																		echo "</tr>";
+																		echo "<tr>";
+																			echo "<td class='user-name'>Email: </td>";
+																			echo "<td class='user-info'>" . $row['email'] . "</td>";
+																		echo "</tr>";
+																		echo "<tr>";
+																			echo "<td class='user-name'>Position: </td>";
+																			echo "<td class='user-info'>" . $row['position'] . "</td>";
+																		echo "</tr>";
+																		echo "<tr>";
+																			echo "<td class='user-name'>Office: </td>";
+																			echo "<td class='user-info'>" . $row['office'] . "</td>";
+																		echo "</tr>";
+
+													echo "</table>";
+
+
+									echo "<center class='update-buttons'>";
+									echo "<p class='btnUpdate'><a href='updateinfo-user.php?id=". $row['id'] ."'>Update Information</a></p>";
+									echo "<p class='btnUpdate'><a href='updatepass-user.php?id=". $row['id'] ."'>Update Password</a></p>";
+									echo "</center>";
+									}
+									// Free result set
+									mysqli_free_result($result);
+								}
+						} else{
+							echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+							}
+						// Close connection
+						mysqli_close($link);
+					?>
 
               </div>
             </td>
@@ -75,9 +111,8 @@
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="createdocu.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>create document</p></a></li>
-							<li><a href="assigneddocu.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>assigned document</p></a></li>
-							<li><a href="office.php"><img src="img/manage-user-icon.png" alt="manage-user-icon"><p>in your office</p></a></li>
+							<li><a href="adddocument.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
 							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
 						</ul>
 					</div>
