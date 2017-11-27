@@ -27,7 +27,7 @@
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn">User</button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="assigneddocu.php">My Menus</a>
+					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
           <a href="login.php">Logout</a>
         </div>
@@ -35,45 +35,72 @@
     </div>
 
     <div class="contents">
-      <table>
-        <tr>
-          <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, user</h3>
-          		<img src="img/minda-logo.png" alt="user-profile-pic">
-          </td>
-          <td class="am-display" rowspan="2" valign="top">
-            <h3 class="docu-type">communication letter</h3>
-              <div class="menu-display" style="height: 100%">
-								<div class="view-docu-div">
-									<h3 class="sender">human resource management <br/><span class="sender-name">mary elisse gonzales</span></h3>
-
-									<h3 class="docu-name">Sample Document Name</h3>
-									<a href="#" title="View Document">sample_document_name.pdf</a>
-									<p class="display-note">lorem ipsum dolor</p>
-									<h3 class="deadline">Deadline: </h3>
-									</div>
-
-									<center class="update-buttons">
-									<p class="btnUpdate"><a href="#">Assign Now</a></p>
-									<p class="btnUpdate"><a href="#">Cancel</a></p>
-									</center>
-              </div>
-            </td>
-          </tr>
-					<td class="admin-menu" valign="top">
-						<div class="user-menus">
-						<h3 class="nav-header">menu</h3>
-						<ul>
-							<li><a href="createdocu.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>create document</p></a></li>
-							<li><a href="assigneddocu.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>assigned document</p></a></li>
-							<li><a href="office.php"><img src="img/manage-user-icon.png" alt="manage-user-icon"><p>in your office</p></a></li>
-							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
-						</ul>
-					</div>
-					</td>
+			<div class="view-docu">
+				<div class="docu-code">
+					<h2>2017-DTS-IN01 <span>Processing</span></h2>
+				</div>
+				<table>
 					<tr>
-					</tr>
-        </table>
+						<td>
+				<div class="docu-detail">
+				  <h3 class="nav-header">document details</h3>
+						<div class="det-br">
+							<table>
+								<tr>
+									<th>document type</th>
+										<td>Request</td>
+								</tr>
+								<tr>
+									<th>delivery method</th>
+										<td>Email</td>
+								</tr>
+								<tr>
+									<th>details</th>
+										<td>From: Angelina Jolie of Department of Energy. This is a sample document</td>
+								</tr>
+								<tr>
+									<th>recipient</th>
+										<td>Mary Elisse Gonzales - Finance Division</td>
+								</tr>
+								<tr>
+									<th>deadline</th>
+										<td>11/28/2017</td>
+								</tr>
+							</table>
+						</div>
+				</div>
+			</td>
+			<td valign="top">
+				<div class="attachment">
+					 <h3 class="nav-header">attachments</h3>
+					 <div class="at-br">
+						 <table>
+							 <tr>
+								 <th>Filename</th>
+								 <th>Action</th>
+							 </tr>
+							 <tr>
+								 <td>Sample_Docu.pdf</td>
+								 <td class="action-icons"><center>
+										 <a href="#"><img src="img/view-icon.png" title="View"></a>
+										 <a href="#"><img src="img/delete-ico.png" title="Delete"></a><center>
+										 </td>
+							 </tr>
+							 <tr>
+								 <td>Another_Docu.pdf</td>
+								 <td class="action-icons"><center>
+										 <a href="#"><img src="img/view-icon.png" title="View"></a>
+										 <a href="#"><img src="img/delete-ico.png" title="Delete"></a><center>
+										 </td>
+							 </tr>
+						 </table>
+					 </div>
+				 </div>
+			</td>
+		</tr>
+	</table>
+
+</div>
       </div>
 
     </div>
