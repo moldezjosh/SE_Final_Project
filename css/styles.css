@@ -13,18 +13,44 @@ body {
 	color: rgb(253,103,33);
 	font-size: 14px;
 	background-color: rgb(255,254,159);
-	padding: 5px;
+	padding: 10px;
 	margin-top: 3px;
 }
 
-.login-info { font-size: 14px; color: rgb(51,51,51);}
-.field-up { padding: 5px; }
-#login-user {margin-left: 3px;}
-#login-pass { margin-left: 5.5px;}
-#btnLogin { margin-left: 75px;}
-#forgotPass { margin-left: 75px;font-size: 12px;}
-#forgotPass a { text-decoration: none; color: rgb(253,103,33);}
+.layout-table {
+	margin: 0 auto;
+	padding: 30px;
+}
 
+.input-txt {
+	padding: 7px;
+}
+
+.btnLogin {
+	font-size: 14px;
+	padding: 7px 20px;
+	border: 1px solid #ccc;
+  border-radius: 8px;
+	background-color: #fd9941;
+	color: white;
+	margin-bottom: 30px;
+}
+
+.btnLogin:hover {background-color: rgb(255,153,0); cursor: pointer;}
+.login {
+	border-bottom: 2px solid rgb(255,254,159);
+	border-left: 2px solid rgb(255,254,159);
+	border-right: 2px solid rgb(255,254,159);
+}
+
+.layout-table td {
+	padding: 30px;
+}
+
+
+.login-info { font-size: 14px; color: rgb(51,51,51);}
+.field-up { padding: 5px; margin: 20px 0px;}
+.field-up span {font-size: 11px; color: red;}
 .banner p {
 	font-size: 12px;
 	color: rgb(51,51,51);
@@ -53,26 +79,6 @@ body {
 	font-size: 9px;
 	padding: 22px;
 }
-
-#login-err-div {
-	width: 577px;
-	height: 302px;
-	margin: 0 auto;
-	margin-top: 30px;
-	border-left: 1px solid rgb(255,254,159);
-	border-right: 1px solid rgb(255,254,159);
-	border-bottom: 1px solid rgb(255,254,159);
-}
-
-#login-err-div p {
-	margin-top: 40px;
-	font-size: 14px;
-	color: rgb(255,0,0);
-	text-align: center;
-}
-
-.field-up-err { padding-top: 20px; padding-left: 10px; margin-left: 125px;}
-#btnLogin-err { margin-top: 30px; }
 
 .search-label {
 	color: rgb(51,51,51);
@@ -204,15 +210,17 @@ body {
 
 .menu-display { display: table; width: 100%;}
 .create-table { width; 410px; margin: 15px auto 0 auto;}
-.forms input, .forms select { margin: 5px;}
+.create-table tr {padding: 10px 0}
+.forms input, .forms select, .forms textarea { margin: 5px;}
 
-.forms input[type=text], .forms select, .forms input[type=password] {
+.forms input[type=text], .forms .sel-width, .forms input[type=password], .dl {
 	padding: 5px;
 	border: 1px solid #ccc;
   border-radius: 4px;
-	width: 250px;
 }
 
+.forms input[type=text], .forms input[type=password]{ width: 250px; }
+.forms .sel-width { width: 262px;}
 .create-label {text-align: right;}
 
 .btnOk, .btnCancel {
@@ -306,6 +314,12 @@ body {
 }
 
 .update-textbox {width: 70%; padding: 10px 10px 10px 30px;}
+.update-textbox input[type=password]{
+	padding: 5px;
+	border: 1px solid #ccc;
+  border-radius: 4px;
+	width: 300px;
+}
 .update-info { border-collapse: collapse;}
 .curr-pass {
 	margin-top: 20px;
@@ -328,15 +342,6 @@ body {
 
 .user-menus {nmargin-top: 10px;}
 .search-document { margin: 10px;}
-
-.status {
-	background-color: #666666;
-	color: white;
-	border: 1px solid #666666;
-	border-radius: 4px;
-	height: 25px;
-}
-.status p { margin-top: 3px; }
 .result { padding: 30px;}
 
 .result h2 {
@@ -345,7 +350,7 @@ body {
 	color: #666666;
 }
 
-.result span { color: #333333;b}
+.result span { color: #333333;}
 .result-div .user-header {background-color: #fffe9f;}
 .result-div .user-header:hover {background-color: #fffe9f;}
 .result-div .user-header th {color: #ff9900;}
@@ -355,26 +360,90 @@ body {
 .create-docu input[type=text], .create-docu select, .create-docu textarea { margin: 10px 0; }
 .btnBrowse {margin-left: 10px;}
 
-.docu-type {
-	font-size: 14px;
-	color: rgb(255,153,0);
-	background-color: rgb(255,254,159);
-	padding: 13px;
+.docu-code h2 {
+	font-size: 20px;
+	margin-left: 5px;
+	color: #434343;
+}
+
+.docu-code span {
+	background-color: rgb(255,153,0);
+	color: white;
+	font-size: 15px;
+	padding: 4px 8px;
+}
+
+.docu-detail { width: 550px; height: 100%;}
+.view-docu table {margin: 10px; }
+
+.det-br {
+	border: 2px solid rgb(255,254,159);
+	width: 99%;
+	height: 100%;
+}
+
+.view-docu th {
 	text-transform: capitalize;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
-	margin: 0px;
+	color: white;
+	background-color: rgb(255,153,0);
+	padding: 5px;
+	text-align: left;
+	font-size: 13px;
+	width: 120px;
 }
 
-.view-docu-div {
-	color: #333333;
-	width: 95%;
-	margin: 0 auto;
-	border-bottom: 1px solid rgb(153,153,153);
+.view-docu td {
+	color: #434343;
+	font-size: 13px;
+	padding: 5px;
 }
 
-.sender, .sender-name, .docu-name, .deadline { font-size: 14px; text-transform: capitalize;}
-.view-docu-div  a:link { color: #333333;}
-.view-docu-div  a:hover { color: rgb(255,153,0);}
+.view-docu tr:nth-child(even) {background-color: #f2f2f2;}
 
-.sender-name {font-weight: normal; font-size: 13px;}
+.attachment { width: 280px; height: 100%; margin-left: 20px;}
+.attachment th {text-align: center;}
+.at-br {
+	border: 2px solid rgb(255,254,159);
+	width: 99%;
+	height: 100%;
+}
+
+/* styles for Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
