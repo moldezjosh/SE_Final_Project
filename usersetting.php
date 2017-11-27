@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
@@ -25,11 +28,11 @@
       </form>
 
       <div class="dropdown">
-        <button onclick="dropFunc()" class="dropbtn">Admin</button>
+        <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
 					<a href="index.php">Dashboard</a>
           <a href="usersetting.php">My Menus</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -49,26 +52,51 @@
           <td class="am-display">
             <h3 class="nav-header">user information</h3>
               <div class="menu-display" style="height: 300px">
-								<table class="user-setting-info">
-									<tr>
-										<td class="user-name">Username: </td>
-										<td class="user-info">moldezjosh</td>
-									</tr>
-									<tr>
-										<td class="user-name">Email: </td>
-										<td class="user-info">j.markmoldez@gmail.com</td>
-									</tr>
-									<tr>
-										<td class="user-name">Fullname: </td>
-										<td class="user-info">Joshua Mark Moldez</td>
-									</tr>
-								</table>
 
-									<center class="update-buttons">
-									<p class="btnUpdate"><a href="updateinfo.php">Update Information</a></p>
-									<p class="btnUpdate"><a href="updatepass.php">Update Password</a></p>
-									</center>
-									</form>
+								<?php
+									// Include config file
+									require_once 'include/config.php';
+
+
+									// Attempt select query execution
+
+									$user_sess = trim($_SESSION['username']);
+									$sql = "SELECT * FROM users where username='$user_sess'";
+									if($result = mysqli_query($link, $sql)){
+											if(mysqli_num_rows($result) > 0) {
+													echo "<table class='user-setting-info'>";
+															echo "<tr>";
+															echo "<td class='user-name'>Username: </td>";
+
+															while($row = mysqli_fetch_array($result)){
+																			echo "<td class='user-info'>" . $row['username'] . "</td>";
+																		echo "</tr>";
+																		echo "<tr>";
+																			echo "<td class='user-name'>Email: </td>";
+																			echo "<td class='user-info'>" . $row['email'] . "</td>";
+																		echo "</tr>";
+																		echo "<tr>";
+																			echo "<td class='user-name'>Fullname: </td>";
+																			echo "<td class='user-info'>" . $row['name'] . "</td>";
+																		echo "</tr>";
+
+													echo "</table>";
+
+
+									echo "<center class='update-buttons'>";
+									echo "<p class='btnUpdate'><a href='updateinfo.php?id=". $row['id'] ."'>Update Information</a></p>";
+									echo "<p class='btnUpdate'><a href='updatepass.php?id=". $row['id'] ."'>Update Password</a></p>";
+									echo "</center>";
+									}
+									// Free result set
+									mysqli_free_result($result);
+								}
+						} else{
+							echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+							}
+						// Close connection
+						mysqli_close($link);
+					?>
               </div>
             </td>
           </tr>
