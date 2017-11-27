@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: login.php");
+  exit;
+}
+
 require_once 'include/update-pass.php';
 ?>
 
@@ -35,7 +41,7 @@ require_once 'include/update-pass.php';
         <div id="myDropdown" class="dropdown-content">
 					<a href="index.php">Dashboard</a>
           <a href="usersetting.php">My Menus</a>
-          <a href="login.php">Logout</a>
+          <a href="include/logout.php">Logout</a>
         </div>
       </div>
     </div>

@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: login.php");
+  exit;
+}
+
+
 // Include config file
 require_once 'include/config.php';
 
@@ -224,6 +231,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           			<td><select name="userType" class="sel-width" value="<?php echo $userType; ?>">
 									<option>(please select:)</option>
 									<option>Admin</option>
+                  <option>Records Officer</option>
 									<option>User</option></select>
                   <span class="help-block"><?php echo $userType_err;?></span></td>
 							</tr>
