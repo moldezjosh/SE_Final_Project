@@ -4,8 +4,8 @@ session_start();
 
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  header("location: login.php");
-  exit;
+    header("location: login.php");
+    exit;
 }
 ?>
 
@@ -43,16 +43,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           <a href="include/logout.php">Logout</a>
         </div>
       </div>
-    </div>
-
-    <div>
-      <h2 class="dash-title">document types transacted per category</h2>
-    </div>
-    <div>
-      <h2 class="dash-title">total number of transactions per office</h2>
-    </div>
-    <div>
-      <h2 class="dash-title">pending per office</h2>
     </div>
 
 

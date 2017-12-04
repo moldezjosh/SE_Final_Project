@@ -2,17 +2,12 @@
 // Initialize the session
 session_start();
 
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  header("location: login.php");
-  exit;
-}
 
 // Include config file
-require_once 'include/config.php';
+require_once '../include/config.php';
 
 // Define variables and initialize with empty values
-$docu_code = $docu_type = $deadline = $deli_type = $sender_name = $sender_address = $recipient = $details = "";
+$docu_code = $docu_type = $deadline = $deli_type = $sender_name = $sender_address = $recipient = $details = $status = "";
 $docu_type_err = $deli_type_err = $sender_name_err = $sender_address_err = $recipient_err = $details_err = "";
 
 // Processing form data when form is submitted
@@ -29,10 +24,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
 		//Deadline
-		$month = trim($_POST["month"]);
-		$day = trim($_POST["day"]);
-		$year = trim($_POST["year"]);
-		$deadline = $month."/".$day."/".$year;
+
+		$deadline = trim($_POST["deadline"]);
 
 		// Validate delivery type
 		if(empty(trim($_POST["deli_type"]))){
@@ -73,17 +66,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $details = trim($_POST["details"]);
     }
 
+		// status
+		$status = trim($_POST["status"]);
 
+		//recipient id
+		$reci_name = $recipient;
+		$ex_reci = explode(" -",$reci_name);
+		$reci_name = $ex_reci[0];
+		$sql = "SELECT id FROM users WHERE name='$reci_name'";
+		if($result = mysqli_query($link, $sql)){
+				if(mysqli_num_rows($result) > 0) {
+					while($row = mysqli_fetch_array($result)){
+						$reci_id = $row['id'];
+					}
+				}
+		}
 
     // Check input errors before inserting in database
     if(empty($docu_type_err)  && empty($deli_type_err)  && empty($sender_name_err)  && empty($sender_address_err)  && empty($recipient_err)  && empty($details_err) ){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO document (docu_code, docu_type, deadline, deli_type, sender_name, sender_address, recipient, details) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO document (docu_code, docu_type, deadline, deli_type, sender_name, sender_address, recipient, reci_id, details, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssssssss", $param_docu_code, $param_docu_type, $param_deadline, $param_deli_type, $param_sender_name, $param_sender_address, $param_recipient, $param_details);
+            mysqli_stmt_bind_param($stmt, "ssssssssss", $param_docu_code, $param_docu_type, $param_deadline, $param_deli_type, $param_sender_name, $param_sender_address, $param_recipient, $param_reci_id, $param_details, $param_status);
 
             // Set parameters
             $param_docu_code = $docu_code;
@@ -93,16 +100,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						$param_sender_name = $sender_name;
 						$param_sender_address = $sender_address;
 						$param_recipient = $recipient;
+						$param_reci_id = $reci_id;
 						$param_details = $details;
+						$param_status = $status;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
+
                 // Redirect to documents page
                 header("location: documents.php");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
         }
+				require_once '../include/addtran.php';
+
 
         // Close statement
         mysqli_stmt_close($stmt);
@@ -111,20 +123,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     mysqli_close($link);
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
-  <script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+  <script type="text/javascript" src="../js/scripts.js"></script>
 
 </head>
 <body>
 	<header>
 		<div class="minda-header">
-		<img src="img/minda-header.png" alt="minda-header" class="minda-banner" >
-		<img src="img/minda-img.png" alt="mindanao" class="minda-logo">
+		<img src="../img/minda-header.png" alt="minda-header" class="minda-banner" >
+		<img src="../img/minda-img.png" alt="mindanao" class="minda-logo">
 	</div>
 	<div class="bar-line"></div>
 	</header>
@@ -143,8 +158,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
 					<a href="documents.php">My Menus</a>
-          <a href="usersetting-user.php">Settings</a>
-          <a href="include/logout.php">Logout</a>
+          <a href="usersetting-record.php">Settings</a>
+          <a href="../include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -154,7 +169,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <tr>
           <td class="user-menu" valign="top">
             <h3 class="user-pic-label"><span>welcome</span>, <?php echo $_SESSION['username']; ?></h3>
-          		<img src="img/minda-logo.png" alt="user-profile-pic">
+          		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
           <td class="am-display" rowspan="2" valign="top">
             <h3 class="nav-header">new document</h3>
@@ -179,26 +194,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 												<tr>
 						                <td class="create-label">
 															<label>Deadline: </label></td>
-						          			<td><select name="month" class="dl">
-															<?php
-																for ($mon=1;$mon<=12;$mon++) {
-																	echo '<option value="'.$mon.'">'.$mon.'</option>';
-																}
-															?>
-														</select>
-														<select name="day" class="dl">
-															<?php
-																for ($day=1;$day<=30;$day++) {
-																	echo '<option value="'.$day.'">'.$day.'</option>';
-																}
-															?>
-														</select>
-														<select name="year" class="dl">
-															<option>2017</option>
-															<option>2018</option>
-															<option>2019</option>
-														</select>
-														</td>
+						          			<td><input type="date" name="deadline"/></td>
 												</tr>
 												<tr>
 						                <td class="create-label <?php echo (!empty($deli_type_err)) ? 'has-error' : ''; ?>">
@@ -229,11 +225,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 															<label>Recipient: </label></td>
 						          			<td><select name="recipient" class="sel-width">
 															<option>Please Select</option>
-															<option>Kim So Jung - KMD</option>
-															<option>Jung Ye Rin - LS</option>
-															<option>Jung Eun Bi - FD</option>
-															<option>Choi Yu Na - KMD</option>
-															<option>Hwang Eun Bi - LS</option></select>
+                      <?php
+                							// Include config file
+                						require_once '../include/config.php';
+
+                            function initials($str) {
+                                $ret = '';
+                                foreach (explode(' ', $str) as $word)
+                                    $ret .= strtoupper($word[0]);
+                                return $ret;
+                            }
+
+                							// Attempt select query execution
+                							$sql = "SELECT name, office, userType FROM users WHERE userType='User' ORDER BY name ASC";
+                							if($result = mysqli_query($link, $sql)){
+                									if(mysqli_num_rows($result) > 0) {
+                                    while($row = mysqli_fetch_array($result)){
+																				  echo "<option>". $row['name'] . " - ". initials($row['office']) ."</option>";
+                                    }
+                                    // Free result set
+                										mysqli_free_result($result);
+                                  }
+                                }
+
+                                // Close connection
+                    						mysqli_close($link);
+                              ?> </select>
 															<span class="help-block"><?php echo $recipient_err;?></span>
 														</td>
 												</tr>
@@ -244,6 +261,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 													<span class="help-block"><?php echo $details_err;?></span></td>
 												</tr>
 										</table>
+										<input type="hidden" name="status" value="1" />
 										<center><div class="update-in-pass">
 										<input type="submit" name="btnSave" class="btnOk" value="Save" />
 										<p class="btnCancel"><a href="documents.php">Cancel</a></p>
@@ -256,9 +274,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="adddocument.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
-							<li><a href="documents.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
-							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
+							<li><a href="adddocument.php"><img src="../img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="../img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
+							<li><a href="reports.php"><img src="../img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
 						</ul>
 					</div>
 					</td>

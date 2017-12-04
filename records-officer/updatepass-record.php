@@ -1,27 +1,22 @@
 <?php
 session_start();
 
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  header("location: login.php");
-  exit;
-}
 
-require_once 'include/update-pass.php';
+require_once '../include/update-pass.php';
 ?>
 
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
-  <script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+  <script type="text/javascript" src="../js/scripts.js"></script>
 
 </head>
 <body>
 	<header>
 		<div class="minda-header">
-		<img src="img/minda-header.png" alt="minda-header" class="minda-banner" >
-		<img src="img/minda-img.png" alt="mindanao" class="minda-logo">
+		<img src="../img/minda-header.png" alt="minda-header" class="minda-banner" >
+		<img src="../img/minda-img.png" alt="mindanao" class="minda-logo">
 	</div>
 	<div class="bar-line"></div>
 	</header>
@@ -40,8 +35,8 @@ require_once 'include/update-pass.php';
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
 					<a href="documents.php">My Menus</a>
-          <a href="usersetting-user.php">Settings</a>
-          <a href="include/logout.php">Logout</a>
+          <a href="usersetting-record.php">Settings</a>
+          <a href="../include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -50,8 +45,8 @@ require_once 'include/update-pass.php';
       <table>
         <tr>
           <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, user</h3>
-          		<img src="img/minda-logo.png" alt="user-profile-pic">
+            <h3 class="user-pic-label"><span>Welcome</span>, user</h3>
+          		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
 					<td class="am-display" rowspan="2" valign="top">
 						<h3 class="nav-header">update password</h3>
@@ -96,9 +91,9 @@ require_once 'include/update-pass.php';
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="adddocument.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
-							<li><a href="documents.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
-							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
+							<li><a href="adddocument.php"><img src="../img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="../img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
+							<li><a href="reports.php"><img src="../img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
 						</ul>
 					</div>
 					</td>

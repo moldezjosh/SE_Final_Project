@@ -14,6 +14,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	<title>WebDTS</title>
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
   <script type="text/javascript" src="js/scripts.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header>
@@ -46,14 +49,80 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 
     <div class="contents">
 			<div class="view-docu">
+
+        <?php
+
+        // Include config file
+      require_once 'include/config.php';
+          $docu_id =  trim($_GET["docu_id"]);
+
+          $sql = "SELECT docu_code, status FROM document WHERE docu_id=$docu_id";
+          if($stmt = mysqli_prepare($link, $sql)){
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                $result = mysqli_stmt_get_result($stmt);
+
+                  if(mysqli_num_rows($result) == 1){
+                      $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                      $status = $row['status'];
+                      $docu_code = $row['docu_code'];
+                  }
+            }
+          }
+
+
+
+          ?>
+          <div>
 				<div class="docu-code">
-					<h2>2017-DTS-IN01 <span>Processing</span></h2>
+					<h2><?php echo $docu_code;
+          echo "<span>";
+            if($status==4){
+              echo "Ended";
+            }else {
+              echo "Processing";
+            }
+          "</span></h2>";
+
+          ?>
 				</div>
 
 				<div class="docu-setting">
-					<h2>Release this document</h2>
-					<h2><a href="documents.php">Back</a></h2>
+          <?php
+
+            $user_sess = trim($_SESSION['username']);
+            //$sql = "SELECT userType FROM users WHERE username='$user_sess'";
+            $sql = "SELECT id, userType, recipient.status FROM users LEFT JOIN recipient ON users.id=recipient.reci_id WHERE users.username='$user_sess'";
+            if($stmt = mysqli_prepare($link, $sql)){
+              // Attempt to execute the prepared statement
+              if(mysqli_stmt_execute($stmt)){
+                  $result = mysqli_stmt_get_result($stmt);
+
+                    if(mysqli_num_rows($result) == 1){
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        $userType = $row['userType'];
+                        $stat = $row['status'];
+                    }
+              }
+            }
+
+            if($status==1){
+              echo "<a href='#release' data-toggle='modal'><h2>Release this document</h2></a>";
+            }
+
+            if (($stat==2) && (strcmp($userType,"User")==0)) {
+              echo "<a href='include/receive-docu.php?docu_id=$docu_id'><h2>Receive this document</h2></a>";
+              // echo "<a href='#forward' data-toggle='modal'><h2>Forward</h2></a>";
+            }elseif (($stat==3) && (strcmp($userType,"User")==0)) {
+              echo "<a href='#forward' data-toggle='modal'><h2>Forward</h2></a>";
+            }
+           ?>
+
+					<h2><a href="javascript:history.back()">Back</a></h2>
 				</div>
+      </div>
+
+        <?php include('records-officer/release.php'); ?>
 
 				<table>
 					<tr>
@@ -63,9 +132,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 						<div class="det-br">
 							<table>
 								<?php
-								// Include config file
-							require_once 'include/config.php';
-							  $docu_id =  trim($_GET["docu_id"]);
+
+
 
 								// Attempt select query execution
 								$sql = "SELECT * FROM document WHERE docu_id='$docu_id'";
@@ -104,14 +172,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 												echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 										}
 
-								// Close connection
-								mysqli_close($link);
-													 ?>
+										?>
 						</div>
 				</div>
 			</td>
 			<td valign="top">
 				<div class="attachment">
+          <a href="#" class="plus-icon" title="Add">&plus;</a>
+
 					 <h3 class="nav-header">attachments</h3>
 					 <div class="at-br">
 						 <table>
@@ -135,7 +203,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 
 			<div class="transact-div">
 				 <h3 class="nav-header">transactions</h3>
-				 <div>
+				 <div class="at-br">
 				<table class="transact-table">
 					<tr>
 						<th>Date and Time</th>
@@ -145,14 +213,29 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 						<th>Remarks</th>
 						<th>Duration</th>
 					</tr>
-					<tr>
-						<td>27/11/2017-9:01 PM</td>
-						<td>KMD</td>
-						<td>Mary Elisse Gonzales</td>
-						<td>N/A</td>
-						<td>Received</td>
-						<td>N/A</td>
-					</tr>
+          <?php
+
+
+          $sql = "SELECT * FROM transaction WHERE docu_id='$docu_id' ORDER BY transact_id DESC";
+          if($result = mysqli_query($link, $sql)){
+              if(mysqli_num_rows($result) > 0) {
+                  while($row = mysqli_fetch_array($result)){
+
+                    echo "<tr>";
+          					echo "<td>". $row['dateAdded'] ."</td>";
+          					echo "<td>". $row['location'] ."</td>";
+          					echo "<td>". $row['person_ic'] ."</td>";
+          					echo "<td>". $row['route'] ."</td>";
+          					echo "<td>". $row['remarks'] ."</td>";
+          					echo "<td>". $row['duration'] ."</td>";
+          					echo "</tr>";
+                    }
+              }
+            }
+            mysqli_free_result($result);
+            // Close connection
+            mysqli_close($link);
+          ?>
 				</table>
 			</div>
 			</div>

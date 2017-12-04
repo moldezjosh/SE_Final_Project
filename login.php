@@ -54,8 +54,11 @@
 															if(strcmp($userType,"Admin")==0){
 																header("location: index.php");
 																exit();
+															}else if(strcmp($userType,"User")==0){
+																header("location: user/usersetting-user.php");
+																exit();
 															}else{
-																header("location: usersetting-user.php");
+																header("location: records-officer/usersetting-record.php");
 																exit();
 															}
 

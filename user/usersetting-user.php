@@ -4,7 +4,7 @@ session_start();
 
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  header("location: login.php");
+  header("location: ../login.php");
   exit;
 }
 ?>
@@ -12,15 +12,15 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
-  <script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+  <script type="text/javascript" src="../js/scripts.js"></script>
 
 </head>
 <body>
 	<header>
 		<div class="minda-header">
-		<img src="img/minda-header.png" alt="minda-header" class="minda-banner" >
-		<img src="img/minda-img.png" alt="mindanao" class="minda-logo">
+		<img src="../img/minda-header.png" alt="minda-header" class="minda-banner" >
+		<img src="../img/minda-img.png" alt="mindanao" class="minda-logo">
 	</div>
 	<div class="bar-line"></div>
 	</header>
@@ -40,7 +40,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <div id="myDropdown" class="dropdown-content">
 					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
-          <a href="include/logout.php">Logout</a>
+          <a href="../include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -49,15 +49,15 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
       <table>
         <tr>
           <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, user</h3>
-          		<img src="img/minda-logo.png" alt="user-profile-pic">
+            <h3 class="user-pic-label"><span>welcome</span>, <?php echo $_SESSION['username']; ?></h3>
+          		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
           <td class="am-display" rowspan="2" valign="top">
             <h3 class="nav-header">user information</h3>
               <div class="menu-display" style="height: 350px">
 								<?php
 									// Include config file
-									require_once 'include/config.php';
+									require_once '../include/config.php';
 
 
 									// Attempt select query execution
@@ -111,9 +111,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="adddocument.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
-							<li><a href="documents.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
-							<li><a href="reports.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
+							<li><a href="incomingdocu.php"><img src="../img/dashboard-icon.png" alt="dashboard-icon"><p>incoming documents</p></a></li>
+							<li><a href="processingdocu.php"><img src="../img/create-user-icon.png" alt="crate-user-icon"><p>processing documents</p></a></li>
+							<li><a href="processeddocu.php"><img src="../img/user-setting-icon.png" alt="user-setting-icon"><p>processed documents</p></a></li>
 						</ul>
 					</div>
 					</td>

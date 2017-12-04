@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once 'include/config.php';
+require_once 'config.php';
 
 // Define variables and initialize with empty values
 $username = $email = $name = $position = $userType="";
@@ -97,8 +97,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 if(strcmp($userType,"Admin")==0){
                   header("location: usersetting.php");
                   exit();
-                }else{
+                }else if(strcmp($userType,"User")==0){
                   header("location: usersetting-user.php");
+                  exit();
+                }else{
+                  header("location: usersetting-record.php");
                   exit();
                 }
             } else{

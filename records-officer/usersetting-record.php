@@ -1,24 +1,26 @@
 <?php
-	session_start();
+// Initialize the session
+session_start();
 
-	// If session variable is not set it will redirect to login page
-	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-	  header("location: login.php");
-	  exit;
-	}
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: ../login.php");
+  exit;
+}
 ?>
+
 <!DOCTYPE html>
 <head>
 	<title>WebDTS</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
-  <script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+  <script type="text/javascript" src="../js/scripts.js"></script>
 
 </head>
 <body>
 	<header>
 		<div class="minda-header">
-		<img src="img/minda-header.png" alt="minda-header" class="minda-banner" >
-		<img src="img/minda-img.png" alt="mindanao" class="minda-logo">
+		<img src="../img/minda-header.png" alt="minda-header" class="minda-banner" >
+		<img src="../img/minda-img.png" alt="mindanao" class="minda-logo">
 	</div>
 	<div class="bar-line"></div>
 	</header>
@@ -36,9 +38,9 @@
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="index.php">Dashboard</a>
-          <a href="usersetting.php">My Menus</a>
-          <a href="include/logout.php">Logout</a>
+					<a href="documents.php">My Menus</a>
+          <a href="usersetting-record.php">Settings</a>
+          <a href="../include/logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -46,22 +48,16 @@
     <div class="contents">
       <table>
         <tr>
-          <td class="admin-menu" valign="top">
-            <h3 class="nav-header">admin menu</h3>
-            <ul>
-              <li><a href="index.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>dashboard</p></a></li>
-              <li class="create-img"><a href="createuser.php"><img src="img/create-user-icon.png" alt="crate-user-icon"><p>create new user</p></a></li>
-              <li><a href="manageuser.php"><img src="img/manage-user-icon.png" alt="manage-user-icon"><p>manage user</p></a></li>
-              <li><a href="usersetting.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>user setting</p></a></li>
-            </ul>
+          <td class="user-menu" valign="top">
+            <h3 class="user-pic-label"><span>welcome</span>, <?php echo $_SESSION['username']; ?></h3>
+          		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
-          <td class="am-display">
+          <td class="am-display" rowspan="2" valign="top">
             <h3 class="nav-header">user information</h3>
-              <div class="menu-display" style="height: 300px">
-
+              <div class="menu-display" style="height: 350px">
 								<?php
 									// Include config file
-									require_once 'include/config.php';
+									require_once '../include/config.php';
 
 
 									// Attempt select query execution
@@ -72,26 +68,30 @@
 											if(mysqli_num_rows($result) > 0) {
 													echo "<table class='user-setting-info'>";
 															echo "<tr>";
-															echo "<td class='user-name'>Username: </td>";
+															echo "<td class='user-name'>Fullname: </td>";
 
 															while($row = mysqli_fetch_array($result)){
-																			echo "<td class='user-info'>" . $row['username'] . "</td>";
+																			echo "<td class='user-info'>" . $row['name'] . "</td>";
 																		echo "</tr>";
 																		echo "<tr>";
 																			echo "<td class='user-name'>Email: </td>";
 																			echo "<td class='user-info'>" . $row['email'] . "</td>";
 																		echo "</tr>";
 																		echo "<tr>";
-																			echo "<td class='user-name'>Fullname: </td>";
-																			echo "<td class='user-info'>" . $row['name'] . "</td>";
+																			echo "<td class='user-name'>Position: </td>";
+																			echo "<td class='user-info'>" . $row['position'] . "</td>";
+																		echo "</tr>";
+																		echo "<tr>";
+																			echo "<td class='user-name'>Office: </td>";
+																			echo "<td class='user-info'>" . $row['office'] . "</td>";
 																		echo "</tr>";
 
 													echo "</table>";
 
 
 									echo "<center class='update-buttons'>";
-									echo "<p class='btnUpdate'><a href='updateinfo.php?id=". $row['id'] ."'>Update Information</a></p>";
-									echo "<p class='btnUpdate'><a href='updatepass.php?id=". $row['id'] ."'>Update Password</a></p>";
+									echo "<p class='btnUpdate'><a href='updateinfo-record.php?id=". $row['id'] ."'>Update Information</a></p>";
+									echo "<p class='btnUpdate'><a href='updatepass-record.php?id=". $row['id'] ."'>Update Password</a></p>";
 									echo "</center>";
 									}
 									// Free result set
@@ -103,9 +103,22 @@
 						// Close connection
 						mysqli_close($link);
 					?>
+
               </div>
             </td>
           </tr>
+					<td class="admin-menu" valign="top">
+						<div class="user-menus">
+						<h3 class="nav-header">menu</h3>
+						<ul>
+							<li><a href="adddocument.php"><img src="../img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="../img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
+							<li><a href="reports.php"><img src="../img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
+						</ul>
+					</div>
+					</td>
+					<tr>
+					</tr>
         </table>
       </div>
 

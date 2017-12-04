@@ -3,9 +3,10 @@
 
 	// If session variable is not set it will redirect to login page
 	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-	  header("location: login.php");
-	  exit;
+	    header("location: login.php");
+	    exit;
 	}
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -67,7 +68,7 @@
 						require_once 'include/config.php';
 
 							// Attempt select query execution
-							$sql = "SELECT * FROM users";
+							$sql = "SELECT * FROM users ORDER BY username ASC";
 							if($result = mysqli_query($link, $sql)){
 									if(mysqli_num_rows($result) > 0) {
 										echo "<table class='user-list'>";
@@ -81,6 +82,7 @@
 														echo "<th>Action</th>";
 												echo "</tr>";
 										while($row = mysqli_fetch_array($result)){
+											if(!strcmp($row['userType'],"Admin")==0){
 												echo "<tr class='user-data'>";
 														echo "<td>". $row['username'] ."</td>";
 														echo "<td class='fullname-user'>". $row['name'] ."</td>";
@@ -90,8 +92,9 @@
 														echo "<td>". $row['userType'] ."</td>"; ?>
 														<td><a href="#del<?php echo $row['id']; ?>" data-toggle="modal"><img src="img/delete-ico.png" class="btn btn-info btn-lg" title="Delete"></a></td>
 														<?php
-														include('action.php');
+														include('include/action.php');
 												echo "</tr>";
+											}
 										}
 										echo "</table>";
 										// Free result set

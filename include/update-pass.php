@@ -80,8 +80,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 if(strcmp($userType,"Admin")==0){
                   header("location: usersetting.php");
                   exit();
-                }else{
+                }else if(strcmp($userType,"User")==0){
                   header("location: usersetting-user.php");
+                  exit();
+                }else{
+                  header("location: usersetting-record.php");
                   exit();
                 }
 

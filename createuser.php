@@ -3,9 +3,10 @@ session_start();
 
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  header("location: login.php");
-  exit;
+    header("location: login.php");
+    exit;
 }
+
 
 
 // Include config file
@@ -197,7 +198,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           </td>
           <td class="am-display">
             <h3 class="nav-header">create new user</h3>
-            <div class="menu-display" style="height: 450px">
+            <div class="menu-display" style="height: 100%">
               <form class="forms" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 								<table class="create-table">
 									<tr>
@@ -223,6 +224,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 									<option>(please select:)</option>
 									<option>Knowledge Management Division</option>
 									<option>Legal Services</option>
+                  <option>Record Office</option>
 									<option>Finance Division</option></select>
                   <span class="help-block"><?php echo $office_err;?></span></td>
 							</tr>
