@@ -13,7 +13,9 @@
 	<title>WebDTS</title>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
   <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header>
@@ -37,7 +39,6 @@
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="incomingdocu.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
           <a href="../include/logout.php">Logout</a>
         </div>
@@ -48,11 +49,11 @@
       <table>
         <tr>
           <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, <?php echo $_SESSION['username']; ?></h3>
+            <h3 class="user-pic-label"><span>Welcome</span>, <?php echo $_SESSION['username']; ?></h3>
           		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
           <td class="am-display" rowspan="2" valign="top">
-            <h3 class="nav-header">all processing documents</h3>
+            <h3 class="nav-header">all processing documents<span class="badge badge-light">0</span></h3>
               <div class="menu-display" style="height: 350px">
 
 								<table class="user-list" style="width: 100%">
@@ -86,7 +87,7 @@
 								  mysqli_stmt_close($stmt);
 
 									// Attempt select query execution
-									$sql = "SELECT * from document LEFT JOIN recipient ON document.docu_id=recipient.docu_id WHERE recipient.status=3 AND recipient.reci_id=$id";
+									$sql = "SELECT * from document LEFT JOIN recipient ON document.docu_id=recipient.docu_id WHERE recipient.status=3 AND recipient.reci_id=$id ORDER BY document.docu_id DESC";
 									if($result = mysqli_query($link, $sql)){
 											if(mysqli_num_rows($result) > 0) {
 													while($row = mysqli_fetch_array($result)){
@@ -96,7 +97,7 @@
 																	echo "<td>". $row['sender_name'] . "</td>";
 																	echo "<td>". $row['dateAdded'] ."</td>";
 																	echo "<td class='action-icons'>
-																			<a href='../viewdocu.php?docu_id=". $row['docu_id'] ."'><img src='../img/view-icon.png' title='View'></a>
+																			<a href='viewdocu.php?docu_id=". $row['docu_id'] ."'><img src='../img/view-icon.png' title='View'></a>
 																			</td>";
 																echo "</tr>";
 															}

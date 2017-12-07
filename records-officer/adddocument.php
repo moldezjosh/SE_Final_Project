@@ -157,7 +157,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="documents.php">My Menus</a>
           <a href="usersetting-record.php">Settings</a>
           <a href="../include/logout.php">Logout</a>
         </div>
@@ -168,7 +167,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <table>
         <tr>
           <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, <?php echo $_SESSION['username']; ?></h3>
+            <h3 class="user-pic-label"><span>Welcome</span>, <?php echo $_SESSION['username']; ?></h3>
           		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
           <td class="am-display" rowspan="2" valign="top">

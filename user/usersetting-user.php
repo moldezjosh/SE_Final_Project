@@ -38,7 +38,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="documents.php">My Menus</a>
           <a href="usersetting-user.php">Settings</a>
           <a href="../include/logout.php">Logout</a>
         </div>

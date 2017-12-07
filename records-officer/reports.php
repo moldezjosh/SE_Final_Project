@@ -31,7 +31,7 @@ session_start();
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="documents.php">My Menus</a>
+					<a href="documents.php">Documents</a>
           <a href="usersetting-record.php">Settings</a>
           <a href="../include/logout.php">Logout</a>
         </div>

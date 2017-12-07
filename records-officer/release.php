@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="include/release-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+				<form method="POST" action="release-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
 					<div class="row">
 						<div class="col-lg-2">
 							<label class="control-label" style="position:relative; top:7px;">Route to/CC:</label>
@@ -19,7 +19,7 @@
 
         <?php
                 // Include config file
-              require_once 'include/config.php';
+              require_once '../include/config.php';
 
               function initials($str) {
                   $ret = '';
@@ -65,6 +65,7 @@
     </div>
 <!-- End of Release -->
 
+
 <!-- Forward -->
     <div class="modal fade" id="forward" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -75,7 +76,7 @@
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="include/forward-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+				<form method="POST" action="forward-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
 					<div class="row">
 						<div class="col-lg-2">
 							<label class="control-label" style="position:relative; top:7px;">Route to/CC:</label>
@@ -86,7 +87,7 @@
 
         <?php
                 // Include config file
-              require_once 'include/config.php';
+              require_once '../include/config.php';
 
                 // Attempt select query execution
                 $sql = "SELECT name, office, userType FROM users WHERE userType='User' ORDER BY name ASC";
@@ -123,4 +124,74 @@
             </div>
         </div>
     </div>
-<!-- End of Release -->
+<!-- End of Forward -->
+
+
+<!-- End -->
+    <div class="modal fade" id="end" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <center><h4 class="modal-title" id="myModalLabel">End Document</h4></center>
+                </div>
+                <div class="modal-body">
+				<div class="container-fluid">
+				<form method="POST" action="end-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+
+					<div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-2">
+							<label class="control-label" style="position:relative; top:7px;">Remarks:</label>
+						</div>
+						<div class="col-lg-10">
+              <textarea rows="3" cols="34" class="form-control" name="remarks" placeholder="Remarks"></textarea>
+						</div>
+					</div>
+					<div style="height:10px;"></div>
+
+                </div>
+				</div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</a>
+				</form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!-- End of End -->
+
+
+<!-- Attach Files -->
+    <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <center><h4 class="modal-title" id="myModalLabel">Upload</h4></center>
+                </div>
+                <div class="modal-body">
+				<div class="container-fluid">
+				<form method="POST" action="../records-officer/upload-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+
+					<div style="height:10px;"></div>
+					<div class="row">
+
+						<div class="col-lg-10">
+              <input type="file" name="files" id="files"/>
+						</div>
+					</div>
+					<div style="height:10px;"></div>
+
+                </div>
+				</div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="btn-upload">Upload</a>
+				</form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!-- End of Attach Files-->

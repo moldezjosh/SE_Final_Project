@@ -33,7 +33,6 @@ require_once '../include/update-info.php';
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn">User</button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="documents.php">My Menus</a>
           <a href="usersetting-record.php">Settings</a>
           <a href="../include/logout.php">Logout</a>
         </div>
@@ -44,7 +43,7 @@ require_once '../include/update-info.php';
       <table>
         <tr>
           <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, user</h3>
+            <h3 class="user-pic-label"><span>Welcome</span>, user</h3>
           		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
 					<td class="am-display" rowspan="2" valign="top">
