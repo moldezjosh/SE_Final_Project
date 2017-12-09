@@ -49,6 +49,7 @@
 	                            save the username to the session */
 	                            session_start();
 	                            $_SESSION['username'] = $username;
+															$_SESSION['userType'] = $userType;
 
 															// Check if user is admin
 															if(strcmp($userType,"Admin")==0){

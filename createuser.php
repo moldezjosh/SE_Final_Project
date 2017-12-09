@@ -8,7 +8,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 }
 
 
-
 // Include config file
 require_once 'include/config.php';
 
@@ -160,17 +159,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		<div class="minda-header">
 		<img src="img/minda-header.png" alt="minda-header" class="minda-banner" >
 		<img src="img/minda-img.png" alt="mindanao" class="minda-logo">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 	</div>
 	<div class="bar-line"></div>
 	</header>
 	<div class="wrapper">
 
     <div class="search-menu">
-      <form action="" method="post">
+
+      <form action="results.php" method="GET">
         <div class="search-div">
-            <label class="search-label">Search Barcode: </label>
-            <input type="text" name="search-name" id="search-name" placeholder="Search"/>
-            <input type="submit" name="btnSearch" class="btnSearch" value="Search" />
+            <input type="text" name="search_query" placeholder="Track a Document"/>
+            <span><button type="submit" class="btnSearch"><img src="img/search-icon.png"></button></span>
         </div>
       </form>
 

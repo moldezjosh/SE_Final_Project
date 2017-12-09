@@ -14,7 +14,7 @@ $docu_type_err = $deli_type_err = $sender_name_err = $sender_address_err = $reci
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		//document code
-		$docu_code = "2017-DTS-IN01";
+		$docu_code = "2017-DTS-IN-";
 
     // Validate document type
 		if(empty(trim($_POST["docu_type"]))){
@@ -106,6 +106,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
+							$sql = "SELECT docu_id FROM document ORDER BY docu_id DESC LIMIT 1";
+							if($result = mysqli_query($link, $sql)){
+									if(mysqli_num_rows($result) > 0) {
+										while($row = mysqli_fetch_array($result)){
+											$docu_id = $row['docu_id'];
+										}
+									}
+							}
+							$num = "";
+							if(($docu_id>0) && ($docu_id<=9)){
+								$num = "0000".$docu_id;
+							}else if(($docu_id>=10) && ($docu_id<=99)){
+								$num = "000".$docu_id;
+							}else if(($docu_id>=100) && ($docu_id<=999)){
+								$num = "00".$docu_id;
+							}else if(($docu_id>=1000) && ($docu_id<=9999)){
+								$num = "0".$docu_id;
+							}
+
+							$up_docu_code = "2017-DTS-IN-".$num;
+
+							mysqli_query($link,"UPDATE document SET docu_code='$up_docu_code' WHERE docu_id=$docu_id");
 
                 // Redirect to documents page
                 header("location: documents.php");
@@ -133,7 +155,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<title>WebDTS</title>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
   <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header>
@@ -145,12 +169,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	</header>
 	<div class="wrapper">
 
-    <div class="search-menu">
-      <form action="" method="post">
+		<div class="search-menu">
+
+      <form action="../results.php" method="GET">
         <div class="search-div">
-            <label class="search-label">Search Barcode: </label>
-            <input type="text" name="search-name" id="search-name" placeholder="Search"/>
-            <input type="submit" name="btnSearch" class="btnSearch" value="Search" />
+            <input type="text" name="search_query"  placeholder="Track a Document"/>
+            <span><button type="submit" class="btnSearch"><img src="../img/search-icon.png"></button></span>
         </div>
       </form>
 

@@ -29,11 +29,11 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	<div class="wrapper">
 
     <div class="search-menu">
-      <form action="" method="post">
+
+      <form action="../results.php" method="GET">
         <div class="search-div">
-            <label class="search-label">Search Barcode: </label>
-            <input type="text" name="search-name" id="search-name" placeholder="Search"/>
-            <input type="submit" name="btnSearch" class="btnSearch" value="Search" />
+            <input type="text" name="search_query"  placeholder="Track a Document"/>
+            <span><button type="submit" class="btnSearch"><img src="../img/search-icon.png"></button></span>
         </div>
       </form>
 
@@ -128,11 +128,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				<div class="docu-detail">
 				  <h3 class="nav-header">document details</h3>
 						<div class="det-br">
-							<table>
+							<table style="width: 96%">
 								<?php
-
-
-
 								// Attempt select query execution
 								$sql = "SELECT * FROM document WHERE docu_id='$docu_id'";
 								if($result = mysqli_query($link, $sql)){

@@ -14,6 +14,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	<title>WebDTS</title>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
   <script type="text/javascript" src="../js/scripts.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -21,17 +24,18 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		<div class="minda-header">
 		<img src="../img/minda-header.png" alt="minda-header" class="minda-banner" >
 		<img src="../img/minda-img.png" alt="mindanao" class="minda-logo">
+    
 	</div>
 	<div class="bar-line"></div>
 	</header>
 	<div class="wrapper">
 
     <div class="search-menu">
-      <form action="" method="post">
+
+      <form action="../results.php" method="GET">
         <div class="search-div">
-            <label class="search-label">Search Barcode: </label>
-            <input type="text" name="search-name" id="search-name" placeholder="Search"/>
-            <input type="submit" name="btnSearch" class="btnSearch" value="Search" />
+            <input type="text" name="search_query"  placeholder="Track a Document"/>
+            <span><button type="submit" class="btnSearch"><img src="../img/search-icon.png"></button></span>
         </div>
       </form>
 
@@ -48,7 +52,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
       <table>
         <tr>
           <td class="user-menu" valign="top">
-            <h3 class="user-pic-label"><span>welcome</span>, <?php echo $_SESSION['username']; ?></h3>
+            <h3 class="user-pic-label"><span>Welcome</span>, <?php echo $_SESSION['username']; ?></h3>
           		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
           <td class="am-display" rowspan="2" valign="top">

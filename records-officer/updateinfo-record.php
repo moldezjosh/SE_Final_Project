@@ -9,7 +9,9 @@ require_once '../include/update-info.php';
 	<title>WebDTS</title>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css" />
   <script type="text/javascript" src="../js/scripts.js"></script>
-
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header>
@@ -21,12 +23,12 @@ require_once '../include/update-info.php';
 	</header>
 	<div class="wrapper">
 
-    <div class="search-menu">
-      <form action="" method="post">
+		<div class="search-menu">
+
+      <form action="../results.php" method="GET">
         <div class="search-div">
-            <label class="search-label">Search Barcode: </label>
-            <input type="text" name="search-name" id="search-name" placeholder="Search"/>
-            <input type="submit" name="btnSearch" class="btnSearch" value="Search" />
+            <input type="text" name="search_query"  placeholder="Track a Document"/>
+            <span><button type="submit" class="btnSearch"><img src="../img/search-icon.png"></button></span>
         </div>
       </form>
 

@@ -28,12 +28,12 @@
 	</header>
 	<div class="wrapper">
 
-    <div class="search-menu">
-      <form action="" method="post">
+		<div class="search-menu">
+
+      <form action="../results.php" method="GET">
         <div class="search-div">
-            <label class="search-label">Search Barcode: </label>
-            <input type="text" name="search-name" id="search-name" placeholder="Search"/>
-            <input type="submit" name="btnSearch" class="btnSearch" value="Search" />
+            <input type="text" name="search_query"  placeholder="Track a Document"/>
+            <span><button type="submit" class="btnSearch"><img src="../img/search-icon.png"></button></span>
         </div>
       </form>
 
@@ -54,7 +54,25 @@
           		<img src="../img/minda-logo.png" alt="user-profile-pic">
           </td>
           <td class="am-display" rowspan="2" valign="top">
-            <h3 class="nav-header">all documents</h3>
+						<?php
+							// Include config file
+						require_once '../include/config.php';
+
+							$sql = "SELECT count(docu_id) as numOfDocu from document";
+							if($stmt = mysqli_prepare($link, $sql)){
+					      // Attempt to execute the prepared statement
+					      if(mysqli_stmt_execute($stmt)){
+					          $result = mysqli_stmt_get_result($stmt);
+					            if(mysqli_num_rows($result) == 1){
+					                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+					                $numOfDocu = $row['numOfDocu'];
+					            }
+					      }
+					    }
+					    // Close statement
+					    mysqli_stmt_close($stmt);
+							?>
+            <h3 class="nav-header">all documents<span class="badge badge-light"><?php echo $numOfDocu; ?></span></h3>
               <div class="menu-display" style="height: 350px">
 
 								<table class="user-list" style="width: 100%">
@@ -68,8 +86,6 @@
 										<th>Action</th>
 									</tr>
 									<?php
-									// Include config file
-								require_once '../include/config.php';
 
 									// Attempt select query execution
 									$sql = "SELECT * FROM document ORDER BY docu_id DESC";
