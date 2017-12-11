@@ -7,6 +7,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   header("location: ../login.php");
   exit;
 }
+
+// Include go back function
+require_once '../include/goback.php';
+
+if(strcmp($_SESSION['userType'],'Records Officer')!=0){
+	goback();
+}
 ?>
 
 <!DOCTYPE html>

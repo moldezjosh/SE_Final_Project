@@ -7,6 +7,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   header("location: ../login.php");
   exit;
 }
+
+
+	// Include go back function
+	require_once '../include/goback.php';
+
+	if(strcmp($_SESSION['userType'],'User')!=0){
+	  goback();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +32,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		<div class="minda-header">
 		<img src="../img/minda-header.png" alt="minda-header" class="minda-banner" >
 		<img src="../img/minda-img.png" alt="mindanao" class="minda-logo">
-    
+
 	</div>
 	<div class="bar-line"></div>
 	</header>

@@ -95,7 +95,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 // Records updated successfully. Redirect to landing page
                 // Check if user is admin
                 if(strcmp($userType,"Admin")==0){
-                  header("location: usersetting.php");
+                  header("location: index.php");
                   exit();
                 }else if(strcmp($userType,"User")==0){
                   header("location: usersetting-user.php");

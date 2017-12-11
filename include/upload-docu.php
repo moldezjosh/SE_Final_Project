@@ -9,15 +9,7 @@ if(isset($_FILES['files'])) {
     if($_FILES['files']['error'] == 0) {
 
         $from = trim($_GET['from']);
-        // Gather all required data
-      /*  $file = rand(1000,100000)."-".$_FILES['files']['name'];
-        $docu_id = trim($_GET['docu_id']);
-        $filename = trim($_FILES['files']['name']);
-        $mime = trim($_FILES['files']['type']);
-        $file_loc = $_FILES['files']['tmp_name'];
-        $filedata = trim(file_get_contents($_FILES['files']['tmp_name']));
-        $filesize = intval($_FILES['files']['size']);
-        $folder = "../uploads/";*/
+      
 
         $docu_id = trim($_GET['docu_id']);
         $file = rand(1000,100000)."-".$_FILES['files']['name'];

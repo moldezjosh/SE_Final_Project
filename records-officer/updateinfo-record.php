@@ -1,6 +1,22 @@
 <?php
 
 require_once '../include/update-info.php';
+
+session_start();
+
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+	header("location: ../login.php");
+	exit;
+}
+
+// Include go back function
+require_once '../include/goback.php';
+
+if(strcmp($_SESSION['userType'],'Records Officer')!=0){
+	goback();
+}
 ?>
 
 
@@ -87,7 +103,7 @@ require_once '../include/update-info.php';
 									<center>
 									<div class="update-in-pass">
 									<input type="submit" name="btnSave" class="btnOk" value="Update" />
-									<p class="btnCancel"><a href="usersetting-user.php">Cancel</a></p> </div>
+									<p class="btnCancel"><a href="usersetting-record.php">Cancel</a></p> </div>
 								</center>
 								</form>
             </td>

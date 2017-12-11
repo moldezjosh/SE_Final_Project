@@ -7,6 +7,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   exit;
 }
 
+// Include go back function
+require_once 'include/goback.php';
+
+if(strcmp($_SESSION['userType'],'Admin')!=0){
+  goback();
+}
+
 require_once 'include/update-pass.php';
 ?>
 
@@ -41,8 +48,7 @@ require_once 'include/update-pass.php';
       <div class="dropdown">
         <button onclick="dropFunc()" class="dropbtn"><?php echo $_SESSION['username']; ?></button>
         <div id="myDropdown" class="dropdown-content">
-					<a href="index.php">Dashboard</a>
-          <a href="usersetting.php">My Menus</a>
+					<a href="index.php">My Menus</a>
           <a href="include/logout.php">Logout</a>
         </div>
       </div>
@@ -54,10 +60,9 @@ require_once 'include/update-pass.php';
           <td class="admin-menu" valign="top">
             <h3 class="nav-header">admin menu</h3>
             <ul>
-              <li><a href="index.php"><img src="img/dashboard-icon.png" alt="dashboard-icon"><p>dashboard</p></a></li>
               <li><a href="createuser.php"><img src="img/create-user-icon.png" alt="create-user-icon"><p>create new user</p></a></li>
               <li><a href="manageuser.php"><img src="img/manage-user-icon.png" alt="manage-user-icon"><p>manage user</p></a></li>
-              <li><a href="usersetting.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>user setting</p></a></li>
+              <li><a href="index.php"><img src="img/user-setting-icon.png" alt="user-setting-icon"><p>user setting</p></a></li>
             </ul>
           </td>
           <td class="am-display">
@@ -93,7 +98,7 @@ require_once 'include/update-pass.php';
 									<center>
 									<div class="update-in-pass">
 									<input type="submit" name="btnSave" class="btnOk" value="Update" />
-									<p class="btnCancel"><a href="usersetting.php">Cancel</a></p></center>
+									<p class="btnCancel"><a href="index.php">Cancel</a></p></center>
 								</div>
 								</form>
               </div>

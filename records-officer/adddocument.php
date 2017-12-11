@@ -2,9 +2,21 @@
 // Initialize the session
 session_start();
 
-
 // Include config file
 require_once '../include/config.php';
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: ../login.php");
+  exit;
+}
+
+	// Include go back function
+	require_once '../include/goback.php';
+
+	if(strcmp($_SESSION['userType'],'Records Officer')!=0){
+	  goback();
+	}
 
 // Define variables and initialize with empty values
 $docu_code = $docu_type = $deadline = $deli_type = $sender_name = $sender_address = $recipient = $details = $status = "";
@@ -246,8 +258,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 												<tr>
 						                <td class="create-label <?php echo (!empty($recipient_err)) ? 'has-error' : ''; ?>">
 															<label>Recipient: </label></td>
-						          			<td><select name="recipient" class="sel-width">
-															<option>Please Select</option>
+						          			<td><input list="recipient" class="sel-width" placeholder="Enter Name">
+															<datalist id="recipient">
                       <?php
                 							// Include config file
                 						require_once '../include/config.php';
@@ -273,7 +285,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                                 // Close connection
                     						mysqli_close($link);
-                              ?> </select>
+                              ?> </datalist>
 															<span class="help-block"><?php echo $recipient_err;?></span>
 														</td>
 												</tr>

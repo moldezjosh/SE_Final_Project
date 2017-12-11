@@ -82,7 +82,7 @@ session_start();
             mysqli_query($link,"INSERT INTO recipient (docu_id, reci_id, status) VALUES ('$docu_id', '$reci_id', 2)");
 
               // Redirect to documents page
-              header("location: viewdocu.php?docu_id=$docu_id$from=''");
+              header("location: viewdocu.php?docu_id=$docu_id&from=$from");
           } else{
               echo "Something went wrong. Please try again later.";
           }

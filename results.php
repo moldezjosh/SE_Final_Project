@@ -50,8 +50,7 @@
         <?php
             if(strcmp($_SESSION['userType'],"Admin")==0){
               ?>
-      					<a href="index.php">Dashboard</a>
-                <a href="usersetting.php">My Menus</a>
+      					<a href="index.php">My Menus</a>
                 <a href="include/logout.php">Logout</a>
               <?php
             }else if(strcmp($_SESSION['userType'],"User")==0){
@@ -62,6 +61,7 @@
               <?php
             }else{
               ?>
+                <a href="records-officer/documents.php">Documents</a>
                 <a href="records-officer/usersetting-record.php">Settings</a>
                 <a href="include/logout.php">Logout</a>
             <?php
@@ -159,7 +159,7 @@
                            </tr>
                            <?php
 
-                             $sql="SELECT * FROM attachment";
+                             $sql="SELECT * FROM file WHERE docu_id='$docu_id'";
                              $result_set=mysqli_query($link,$sql);
                              if(mysqli_num_rows($result_set) > 0) {
                                  while($row=mysqli_fetch_array($result_set)){
