@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="forward-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+				<form method="POST" action="forward-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>&form=<?php echo $_GET['from']; ?>">
 					<div class="row">
 						<div class="col-lg-2">
 							<label class="control-label" style="position:relative; top:7px;">Route to/CC:</label>

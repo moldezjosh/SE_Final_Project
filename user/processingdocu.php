@@ -113,7 +113,7 @@
 																	echo "<td>". $row['sender_name'] . "</td>";
 																	echo "<td>". $row['dateAdded'] ."</td>";
 																	echo "<td class='action-icons'>
-																			<a href='viewdocu.php?docu_id=". $row['docu_id'] ."'><img src='../img/view-icon.png' title='View'></a>
+																			<a href='viewdocu.php?docu_id=". $row['docu_id'] ."&from=2'><img src='../img/view-icon.png' title='View'></a>
 																			</td>";
 																echo "</tr>";
 															}

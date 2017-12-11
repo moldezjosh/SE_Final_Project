@@ -7,7 +7,7 @@ session_start();
     $docu_id = $location = $person_ic = $route = $recipient = $remarks = $duration = $reci_id = "";
 
     $docu_id =  trim($_GET["docu_id"]);
-
+    $from = trim($_GET["from"]);
 
     $user_session = $_SESSION['username'];
     $sql = "SELECT id, name, office FROM users WHERE username='$user_session'";
@@ -80,9 +80,9 @@ session_start();
           if(mysqli_stmt_execute($stmt)){
             mysqli_query($link,"UPDATE recipient SET status=3 WHERE reci_id=$id AND docu_id=$docu_id");
             mysqli_query($link,"INSERT INTO recipient (docu_id, reci_id, status) VALUES ('$docu_id', '$reci_id', 2)");
-          
+
               // Redirect to documents page
-              header("location: viewdocu.php?docu_id=$docu_id");
+              header("location: viewdocu.php?docu_id=$docu_id$from=''");
           } else{
               echo "Something went wrong. Please try again later.";
           }

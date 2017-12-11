@@ -100,7 +100,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				</div>
       </div>
 
-        <?php include('release.php'); ?>
+      <?php include('release.php'); ?>
 
 				<table>
 					<tr>
@@ -118,6 +118,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 								if($result = mysqli_query($link, $sql)){
 										if(mysqli_num_rows($result) > 0) {
 												while($row = mysqli_fetch_array($result)){
+
 													?>
 															<tr>
 																<th>document type</th>
@@ -142,7 +143,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 													</table>
 													<?php
 												}
-												mysqli_free_result($result);
+                        mysqli_free_result($result);
 										} else {
 												//echo "<p class='lead'><em>No document(s) were found.</em></p>";
 											}
@@ -156,8 +157,11 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			</td>
 			<td valign="top">
 				<div class="attachment">
-          <a href="#upload" class="plus-icon" title="Add">&plus;</a>
-
+          <?php
+            if($status!=4){
+              echo "<a href='#upload' data-toggle='modal' class='plus-icon' title='Add'>&plus;</a>";
+            }
+            ?>
 					 <h3 class="nav-header">attachments</h3>
 					 <div class="at-br">
 						 <table>
@@ -167,27 +171,23 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
               </tr>
                  <?php
 
-                   $sql="SELECT * FROM attachment";
+                   $sql="SELECT * FROM file WHERE docu_id='$docu_id'";
                    $result=mysqli_query($link,$sql);
                    if(mysqli_num_rows($result) > 0) {
-                   while($row=mysqli_fetch_array($result))
-                   {
-                    ?>
-    							 <tr>
-    								 <td><?php echo $row['file'] ?>.<?php echo $row['type'] ?></td>
-    								 <td class="action-icons"><center>
-    										 <a href="#"><img src="../img/view-icon.png" title="View"></a>
-    										<a href="uploads/<?php echo $row['file'] ?>" target="_blank"><img src="../img/delete-ico.png" title="Delete"></a><center>
-    										 </td>
-    							 </tr>
-               <?php
-             }
-                 } ?>
-                 <tr>
-                   <td colspan="2">No File(s) Found</td>
-                 </tr>
-                 <?php
-                 ?>
+                       while($row=mysqli_fetch_array($result)){
+            							 echo "<tr>";
+                           echo "<td>". mb_strimwidth($row['filename'], 0, 20, "...") ."</td>";
+                           echo "<td class='action-icons'><center>
+                           <a href='../uploads/". $row['file'] ."' target='_blank'><img src='../img/view-icon.png' title='View'></a>
+                                 <a href='#delfile". $row['file_id'] ."' data-toggle='modal'><img src='../img/delete-ico.png' title='Delete'></a><center></td>";
+                           echo "</tr>";
+                           include('delete-file.php');
+                        }
+                    }else {
+                      echo "<tr>";
+                        echo "<td colspan='2'>No File(s) Found</td>";
+                      echo "</tr>";
+                    } ?>
 						 </table>
 					 </div>
 				 </div>

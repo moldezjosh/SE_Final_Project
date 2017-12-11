@@ -105,7 +105,7 @@
 																	}
 
 																	echo "<td class='action-icons'>
-																			<a href='viewdocu.php?docu_id=". $row['docu_id'] ."'><img src='../img/view-icon.png' title='View'></a>";
+																			<a href='viewdocu.php?docu_id=". $row['docu_id'] ."&from=4'><img src='../img/view-icon.png' title='View'></a>";
 																			?>
 																			<a href="#deldocu<?php echo $row['docu_id']; ?>" data-toggle="modal"><img src="../img/delete-ico.png" class="btn btn-info btn-lg" title="Delete"></a>
 																			<?php

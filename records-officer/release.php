@@ -76,7 +76,7 @@
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="forward-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+				<form method="POST" action="forward-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>&from=<?php echo $_GET['from']; ?>">
 					<div class="row">
 						<div class="col-lg-2">
 							<label class="control-label" style="position:relative; top:7px;">Route to/CC:</label>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="end-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+				<form method="POST" action="end-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>&from=<?php echo $_GET['from']; ?>">
 
 					<div style="height:10px;"></div>
 					<div class="row">
@@ -173,13 +173,13 @@
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="../records-officer/upload-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>">
+				<form method="POST" action="../include/upload-docu.php?docu_id=<?php echo $_GET['docu_id']; ?>&from=<?php echo $_GET['from']; ?>" enctype="multipart/form-data">
 
 					<div style="height:10px;"></div>
 					<div class="row">
 
 						<div class="col-lg-10">
-              <input type="file" name="files" id="files"/>
+              <input type="file" name="files" id="files" required/>
 						</div>
 					</div>
 					<div style="height:10px;"></div>

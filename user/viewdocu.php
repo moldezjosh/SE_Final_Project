@@ -55,7 +55,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         // Include config file
       require_once '../include/config.php';
           $docu_id =  trim($_GET["docu_id"]);
-
+          $from = trim($_GET["from"]);
 
           $sql = "SELECT docu_code, status FROM document WHERE docu_id=$docu_id";
           if($stmt = mysqli_prepare($link, $sql)){
@@ -70,9 +70,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                   }
             }
           }
-
-
-
           ?>
           <div>
 				<div class="docu-code">
@@ -108,15 +105,23 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             }
 
             if (($stats==2) && (strcmp($userType,"User")==0)) {
-              echo "<a href='receive-docu.php?docu_id=$docu_id'><h2>Receive this document</h2></a>";
-              // echo "<a href='#forward' data-toggle='modal'><h2>Forward</h2></a>";
+              echo "<a href='receive-docu.php?docu_id=$docu_id&from=$from'><h2>Receive this document</h2></a>";
             }elseif (($stats==3) && (strcmp($userType,"User")==0)) {
               echo "<a href='#forward' data-toggle='modal'><h2>Forward</h2></a>";
               echo "<a href='#end' data-toggle='modal'><h2>End</h2></a>";
             }
            ?>
 
-					<h2><a href="javascript:history.back()">Back</a></h2>
+					<h2>
+            <?php
+            if(strcmp($from,'1')==0){
+              echo "<a href='incomingdocu.php'>";
+            }else if(strcmp($from,'2')==0){
+              echo "<a href='processingdocu.php'>";
+            }else{
+              echo "<a href='processeddocu.php'>";
+            }
+            ?>Back</a></h2>
 				</div>
       </div>
 
@@ -173,9 +178,11 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			</td>
 			<td valign="top">
 				<div class="attachment">
-          <a href="#upload" data-toggle='modal' class="plus-icon" title="Add">&plus;</a>
-
-
+          <?php
+            if($status!=4){
+              echo "<a href='#upload' data-toggle='modal' class='plus-icon' title='Add'>&plus;</a>";
+            }
+            ?>
 
 					 <h3 class="nav-header">attachments</h3>
 					 <div class="at-br">
@@ -185,28 +192,23 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 								 <th>Action</th>
 							 </tr>
                <?php
-
-                 $sql="SELECT * FROM attachment";
-                 $result_set=mysqli_query($link,$sql);
-                 if(mysqli_num_rows($result_set) > 0) {
-                 while($row=mysqli_fetch_array($result_set))
-                 {
-                  ?>
-                 <tr>
-                   <td><?php echo $row['file'] ?>.<?php echo $row['type'] ?></td>
-                   <td class="action-icons"><center>
-                       <a href="#"><img src="../img/view-icon.png" title="View"></a>
-                      <a href="uploads/<?php echo $row['file'] ?>" target="_blank"><img src="../img/delete-ico.png" title="Delete"></a><center>
-                       </td>
-                 </tr>
-             <?php
-           }
-               } ?>
-               <tr>
-                 <td colspan="2">No File(s) Found</td>
-               </tr>
-               <?php
-               ?>
+                    $sql="SELECT * FROM file WHERE docu_id='$docu_id'";
+                    $result=mysqli_query($link,$sql);
+                    if(mysqli_num_rows($result) > 0) {
+                        while($row=mysqli_fetch_array($result)){
+                          echo "<tr>";
+                          echo "<td>". mb_strimwidth($row['filename'], 0, 20, "...") ."</td>";
+                          echo "<td class='action-icons'><center>
+                          <a href='../uploads/". $row['file'] ."' target='_blank'><img src='../img/view-icon.png' title='View'></a>
+                                <a href='#delfile". $row['file_id'] ."' data-toggle='modal'><img src='../img/delete-ico.png' title='Delete'></a><center></td>";
+                          echo "</tr>";
+                          include('../records-officer/delete-file.php');
+                        }
+                    }else {
+                        echo "<tr>";
+                        echo "<td colspan='2'>No File(s) Found</td>";
+                        echo "</tr>";
+                    } ?>
 						 </table>
 					 </div>
 				 </div>

@@ -10,6 +10,9 @@ session_start();
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="src/js/horizBarChart.js"></script>
+
 </head>
 <body>
 	<header>
@@ -52,11 +55,33 @@ session_start();
 			      <h2 class="dash-title">pending per office</h2>
 			    </div>
 
+					<canvas id="pieChart"></canvas>
+
       </div>
 
     </div>
         <footer class="footer">
             <center><p class="copyright">COPYRIGHT © 2017. MINDANAO DEVELOPMENT AUTHORITY, REPUBLIC OF THE PHILIPPINES. ALL RIGHTS RESERVED.</p></center>
         </footer>
+
+				<script>
+				var ctxP = document.getElementById("pieChart").getContext('2d');
+var myPieChart = new Chart(ctxP, {
+    type: 'pie',
+    data: {
+        labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+        datasets: [
+            {
+                data: [300, 50, 100, 40, 120],
+                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+            }
+        ]
+    },
+    options: {
+        responsive: true
+    }
+});
+				</script>
     </body>
   </html>
