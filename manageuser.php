@@ -1,18 +1,6 @@
 <?php
-	session_start();
-
-	// If session variable is not set it will redirect to login page
-	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-	    header("location: login.php");
-	    exit;
-	}
-
-	// Include go back function
-	require_once 'include/goback.php';
-
-	if(strcmp($_SESSION['userType'],'Admin')!=0){
-	  goback();
-	}
+	// Include admin session file
+	require_once 'admin-session.php';
 
 ?>
 <!DOCTYPE html>

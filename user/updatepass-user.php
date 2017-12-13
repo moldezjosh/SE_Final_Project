@@ -1,20 +1,8 @@
 <?php
-session_start();
-require_once '../include/update-pass.php';
-
-
-	// If session variable is not set it will redirect to login page
-	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-	  header("location: ../login.php");
-	  exit;
-	}
-
-	// Include go back function
-	require_once '../include/goback.php';
-
-	if(strcmp($_SESSION['userType'],'User')!=0){
-	  goback();
-	}
+	// include update pass file
+	require_once '../include/update-pass.php';
+	// Include user session file
+	require_once 'user-session.php';
 ?>
 
 <!DOCTYPE html>

@@ -1,23 +1,25 @@
 <?php
-// Initialize the session
-session_start();
+    // Initialize the session
+    session_start();
     // Include config file
     require_once '../include/config.php';
-
+    // Define variables and initialize with empty values
     $docu_id = $location = $person_ic = $route = $recipient = $remarks = $duration = $reci_id = "";
-
+    // get the values from the url
     $docu_id =  trim($_GET["docu_id"]);
-    $status = trim($_GET["status"]);
-
+    // get the username session
     $user_session = $_SESSION['username'];
-    $sql = "SELECT id, name, office FROM users WHERE username='$user_session'";
 
+    // a function that will return the first letter of each word
     function initials($str) {
         $ret = '';
         foreach (explode(' ', $str) as $word)
             $ret .= strtoupper($word[0]);
         return $ret;
     }
+
+    // prepare a select statement
+    $sql = "SELECT id, name, office FROM users WHERE username='$user_session'";
 
     if($stmt = mysqli_prepare($link, $sql)){
       // Attempt to execute the prepared statement
@@ -35,12 +37,14 @@ session_start();
     // Close statement
     mysqli_stmt_close($stmt);
 
-
+    // split the name and office of recipient
     $tmp = explode(" - ", trim($_POST["recipient"]));
+    // assign the office of the recipient to route varaible
     $route = $tmp[1];
 
+    // assigning the recipient variable
     $recipient = trim($_POST["recipient"]);
-
+    //prepare select statement
     $sql = "SELECT id FROM users WHERE name='$tmp[0]'";
     if($stmt = mysqli_prepare($link, $sql)){
       // Attempt to execute the prepared statement
@@ -56,10 +60,12 @@ session_start();
     // Close statement
     mysqli_stmt_close($stmt);
 
+    // assigning the remarks variable
     $remarks = trim($_POST["remarks"]);
+    // assigning the duration variable
     $duration = "N/A";
 
-
+      // prapare insert statement
       $sql = "INSERT INTO transaction (docu_id, location, person_ic, route, remarks, duration) VALUES (?, ?, ?, ?, ?, ?)";
 
       if($stmt = mysqli_prepare($link, $sql)){
@@ -78,7 +84,6 @@ session_start();
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt)){
             mysqli_query($link,"UPDATE document SET status=2 WHERE docu_id=$docu_id");
-            //mysqli_query($link,"UPDATE recipient SET status=$status WHERE reci_id=$id");
             mysqli_query($link,"INSERT INTO recipient (docu_id, reci_id, status) VALUES ('$docu_id', '$reci_id', 2)");
               // Redirect to documents page
               header("location: viewdocu.php?docu_id=$docu_id");
@@ -87,13 +92,9 @@ session_start();
           }
       }
 
+    // Close statement
+    mysqli_stmt_close($stmt);
 
-
-              // Close statement
-              mysqli_stmt_close($stmt);
-
-              // Close connection
-              mysqli_close($link);
-
-
+    // Close connection
+    mysqli_close($link);
 ?>

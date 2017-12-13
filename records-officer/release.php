@@ -1,4 +1,4 @@
-<!-- Release -->
+<!-- Release Modal -->
     <div class="modal fade" id="release" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -66,7 +66,7 @@
 <!-- End of Release -->
 
 
-<!-- Forward -->
+<!-- Forward Modal -->
     <div class="modal fade" id="forward" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -127,7 +127,7 @@
 <!-- End of Forward -->
 
 
-<!-- End -->
+<!-- End Proces Modal -->
     <div class="modal fade" id="end" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -163,7 +163,7 @@
 <!-- End of End -->
 
 
-<!-- Attach Files -->
+<!-- Attach Files Modal -->
     <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

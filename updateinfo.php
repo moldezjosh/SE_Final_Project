@@ -1,14 +1,8 @@
 <?php
-
-session_start();
-require_once 'include/update-info.php';
-
-// Include go back function
-require_once 'include/goback.php';
-
-if(strcmp($_SESSION['userType'],'Admin')!=0){
-  goback();
-}
+  // Include admin session file
+  require_once 'admin-session.php';
+  // Include update info file
+  require_once 'include/update-info.php';
 ?>
 
 <!DOCTYPE html>

@@ -24,7 +24,6 @@ session_start();
       // Attempt to execute the prepared statement
       if(mysqli_stmt_execute($stmt)){
           $result = mysqli_stmt_get_result($stmt);
-
             if(mysqli_num_rows($result) == 1){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 $person_ic = $row['name'];
@@ -36,12 +35,7 @@ session_start();
     // Close statement
     mysqli_stmt_close($stmt);
 
-
-
     $route = "N/A";
-
-
-
     $remarks = "Document Received";
     $duration = "N/A";
 
@@ -65,6 +59,7 @@ session_start();
           if(mysqli_stmt_execute($stmt)){
             mysqli_query($link,"UPDATE document SET status=3 WHERE docu_id=$docu_id");
             mysqli_query($link,"UPDATE recipient SET status=3 WHERE reci_id=$id AND docu_id=$docu_id");
+
               // Redirect to documents page
               header("location: viewdocu.php?docu_id=$docu_id&from=$from");
           } else{

@@ -4,10 +4,10 @@ session_start();
 // Include config file
 require_once 'config.php';
 
+  // Define variables and initialize with empty values
   $docu_id = $dateAdded = $location = $person_ic = $route = $remarks = $duration = "";
 
-
-
+  // preapre a select statement
   $sql = "SELECT docu_id, dateAdded FROM document ORDER BY docu_id DESC LIMIT 1";
 
     if($stmt = mysqli_prepare($link, $sql)){
@@ -17,7 +17,7 @@ require_once 'config.php';
 
             if(mysqli_num_rows($result) == 1){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
+                // get the values from the database and assign in a variable
                 $docu_id = $row['docu_id'];
                 $dateAdded = $row['dateAdded'];
             }
@@ -26,8 +26,9 @@ require_once 'config.php';
     // Close statement
     mysqli_stmt_close($stmt);
 
-
+  // get the sessions username
   $user_session = $_SESSION['username'];
+  //prepare a select statement
   $sql = "SELECT name, office FROM users WHERE username='$user_session'";
 
   if($stmt = mysqli_prepare($link, $sql)){
@@ -37,6 +38,7 @@ require_once 'config.php';
 
           if(mysqli_num_rows($result) == 1){
               $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+              // get the values from the database and assign in a variable
               $person_ic = $row['name'];
               $location = initials($row['office']);
           }
@@ -45,19 +47,19 @@ require_once 'config.php';
   // Close statement
   mysqli_stmt_close($stmt);
 
-
+  // if empty assign N/A
   if(empty($route)){
     $route = "N/A";
   }
-
+  // if empty assign N/A
   if(empty($remarks)){
     $remarks = "N/A";
   }
-
+  // if empty assign N/A
   if(empty($duration)){
     $duration = "N/A";
   }
-
+  //prepare insert statement
   $sql = "INSERT INTO transaction (docu_id, dateAdded, location, person_ic, route, remarks, duration) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
   if($stmt = mysqli_prepare($link, $sql)){
@@ -82,10 +84,11 @@ require_once 'config.php';
           echo "Something went wrong. Please try again later.";
       }
   }
-          // Close statement
-          mysqli_stmt_close($stmt);
 
-          // Close connection
-          mysqli_close($link);
+  // Close statement
+  mysqli_stmt_close($stmt);
+
+  // Close connection
+  mysqli_close($link);
 
 ?>

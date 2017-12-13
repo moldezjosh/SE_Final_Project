@@ -1,3 +1,4 @@
+// function in showing the dropdown menu
 function dropFunc() {
     document.getElementById("myDropdown").classList.toggle("show");
 }

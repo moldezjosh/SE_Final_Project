@@ -1,5 +1,5 @@
 
-<!-- Delete Document-->
+<!-- Delete Document Modal -->
     <div class="modal fade" id="deldocu<?php echo $row['docu_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

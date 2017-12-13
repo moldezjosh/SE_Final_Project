@@ -1,14 +1,16 @@
-
+/* Font style for all the text in the system */
 body {
 	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
+/* the style for the header */
 .minda-header {width: 1024px; margin: 0 auto; height: 136px;}
 .minda-banner {margin-left:250px; margin-top: 10px;}
 .minda-logo { position: absolute;}
 .bar-line { height: 20px; background-color: rgb(255,153,0);}
 .wrapper { width: 1024px; margin: 0 auto;}
 
+/* style for all the section titles */
 .tb-title {
 	color: rgb(253,103,33);
 	font-size: 14px;
@@ -17,15 +19,10 @@ body {
 	margin-top: 3px;
 }
 
-.layout-table {
-	margin: 0 auto;
-	padding: 30px;
-}
+.layout-table { margin: 0 auto; padding: 30px; }
+.input-txt { padding: 7px;}
 
-.input-txt {
-	padding: 7px;
-}
-
+/* style for the login button in the login page. */
 .btnLogin {
 	font-size: 14px;
 	padding: 7px 20px;
@@ -35,7 +32,6 @@ body {
 	color: white;
 	margin-bottom: 30px;
 }
-
 .btnLogin:hover {background-color: rgb(255,153,0); cursor: pointer;}
 .login {
 	border-bottom: 2px solid rgb(255,254,159);
@@ -43,14 +39,14 @@ body {
 	border-right: 2px solid rgb(255,254,159);
 }
 
-.layout-table td {
-	padding: 30px;
-}
+.layout-table td { padding: 30px;}
 
-
+/* styles for the textfield where the user will enter the username and password */
 .login-info { font-size: 14px; color: rgb(51,51,51);}
 .field-up { padding: 5px; margin: 20px 0px;}
 .field-up span {font-size: 11px; color: red;}
+
+/* styles for DTS info in the login page*/
 .banner p {
 	font-size: 12px;
 	color: rgb(51,51,51);
@@ -64,6 +60,7 @@ body {
 
 #banner-dts {width: 507px; margin-top: 3px;}
 
+/* styles for all the footers of the system */
 .footer {
 	width: 1024px;
 	height: 56px;
@@ -80,6 +77,7 @@ body {
 	padding: 22px;
 }
 
+/* styles for the search function of the system*/
 .search-div {
 	border: 1px solid #ccc;
   border-radius: 16px;
@@ -105,11 +103,11 @@ body {
 	height: 28px;
 
 }
+
 .btnSearch:hover { cursor: pointer; background-color: #efefef;}
 .search-menu { margin-top: 30px; }
 
-
-
+/* styles for all the dropdown menu in the system */
 .dropbtn {
 		background-color: #fd9941;
     color: white;
@@ -161,6 +159,7 @@ body {
 	text-transform: uppercase;
 	margin: 30px;
 	border-radius: 8px;
+	font-weight: bold;
 }
 
 .contents { margin: 30px;}

@@ -1,23 +1,25 @@
 <?php
-// Initialize the session
-session_start();
+    // Initialize the session
+    session_start();
     // Include config file
     require_once '../include/config.php';
-
+    // Define variables and initialize with empty values
     $docu_id = $location = $person_ic = $route = $recipient = $remarks = $duration = $reci_id = "";
-
+    // get the values from the url
     $docu_id =  trim($_GET["docu_id"]);
     $from = trim($_GET["from"]);
 
-    $user_session = $_SESSION['username'];
-    $sql = "SELECT id, name, office FROM users WHERE username='$user_session'";
-
+    // a function that will return the first letter of each word
     function initials($str) {
         $ret = '';
         foreach (explode(' ', $str) as $word)
             $ret .= strtoupper($word[0]);
         return $ret;
     }
+      // get the username session
+    $user_session = $_SESSION['username'];
+    // prepare a select statement
+    $sql = "SELECT id, name, office FROM users WHERE username='$user_session'";
 
     if($stmt = mysqli_prepare($link, $sql)){
       // Attempt to execute the prepared statement
@@ -35,12 +37,14 @@ session_start();
     // Close statement
     mysqli_stmt_close($stmt);
 
-
+    // split the name and office of recipient
     $tmp = explode(" - ", trim($_POST["recipient"]));
+    // assign the office of the recipient to route varaible
     $route = $tmp[1];
 
+    // assigning the recipient variable
     $recipient = trim($_POST["recipient"]);
-
+    //prepare select statement
     $sql = "SELECT id FROM users WHERE name='$tmp[0]'";
     if($stmt = mysqli_prepare($link, $sql)){
       // Attempt to execute the prepared statement
@@ -60,7 +64,7 @@ session_start();
 
     $duration = "N/A";
 
-
+      // prapare insert statement
       $sql = "INSERT INTO transaction (docu_id, location, person_ic, route, remarks, duration) VALUES (?, ?, ?, ?, ?, ?)";
 
       if($stmt = mysqli_prepare($link, $sql)){
@@ -88,13 +92,9 @@ session_start();
           }
       }
 
+      // Close statement
+      mysqli_stmt_close($stmt);
 
-
-              // Close statement
-              mysqli_stmt_close($stmt);
-
-              // Close connection
-              mysqli_close($link);
-
-
+      // Close connection
+      mysqli_close($link);
 ?>

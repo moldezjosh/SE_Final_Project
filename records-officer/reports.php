@@ -1,5 +1,6 @@
 <?php
-session_start();
+	// Include records officer session file
+	require_once 'ro-session.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,11 +11,7 @@ session_start();
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
 	<header>
@@ -49,15 +46,16 @@ session_start();
 
 			    <div>
 			      <h2 class="dash-title">document types transacted per category</h2>
+						<div id="chartPerCategory" style="width: 100%; height: 380px;"></div>
 			    </div>
 			    <div>
 			      <h2 class="dash-title">total number of transactions per office</h2>
+						<div id="chartPerOffice" style="width: 100%; height: 380px;"></div>
 			    </div>
 			    <div>
 			      <h2 class="dash-title">pending per office</h2>
+						<div id="chartPending" style="width: 100%; height: 380px;"></div>
 			    </div>
-
-					<div id="chart"></div>
 
       </div>
 
@@ -66,16 +64,43 @@ session_start();
             <center><p class="copyright">COPYRIGHT © 2017. MINDANAO DEVELOPMENT AUTHORITY, REPUBLIC OF THE PHILIPPINES. ALL RIGHTS RESERVED.</p></center>
         </footer>
 
-				<script>
-				Morris.Bar({
- element : 'chart',
- data:[<?php echo $chart_data; ?>],
- xkey:'date',
- ykeys:[ 'P_in', 'P_out'],
- labels:[ 'Product In', 'Product Out'],
- hideHover:'auto',
- stacked:true
-});
-				</script>
+				<script type="text/javascript">
+        $(document).ready(function () {
+
+            $.getJSON("perCategory.php", function (result) {
+
+                var chart = new CanvasJS.Chart("chartPerCategory", {
+                    data: [{
+														type: "bar",
+														dataPoints: result
+                        }]
+                });
+                chart.render();
+            });
+
+						$.getJSON("perOffice.php", function (result) {
+
+                var chart2 = new CanvasJS.Chart("chartPerOffice", {
+                    data: [{
+														type: "bar",
+														dataPoints: result
+                        }]
+                });
+                chart2.render();
+            });
+
+						$.getJSON("pending.php", function (result) {
+
+                var chart3 = new CanvasJS.Chart("chartPending", {
+                    data: [{
+														type: "bar",
+														dataPoints: result
+                        }]
+                });
+                chart3.render();
+            });
+        });
+    </script>
+
     </body>
   </html>

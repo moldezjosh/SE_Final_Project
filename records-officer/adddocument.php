@@ -1,22 +1,8 @@
 <?php
-// Initialize the session
-session_start();
-
+// Include records officer session file
+require_once 'ro-session.php';
 // Include config file
 require_once '../include/config.php';
-
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  header("location: ../login.php");
-  exit;
-}
-
-	// Include go back function
-	require_once '../include/goback.php';
-
-	if(strcmp($_SESSION['userType'],'Records Officer')!=0){
-	  goback();
-	}
 
 // Define variables and initialize with empty values
 $docu_code = $docu_type = $deadline = $deli_type = $sender_name = $sender_address = $recipient = $details = $status = "";
@@ -35,8 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $docu_type = trim($_POST["docu_type"]);
     }
 
-		//Deadline
-
+		// Assigning Deadline
 		$deadline = trim($_POST["deadline"]);
 
 		// Validate delivery type
@@ -126,6 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 										}
 									}
 							}
+              //formating the docuemnt code
 							$num = "";
 							if(($docu_id>0) && ($docu_id<=9)){
 								$num = "0000".$docu_id;
@@ -136,9 +122,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							}else if(($docu_id>=1000) && ($docu_id<=9999)){
 								$num = "0".$docu_id;
 							}
-
+              // final document code of the created document
 							$up_docu_code = "2017-DTS-IN-".$num;
-
+              // a query that will update the document code
 							mysqli_query($link,"UPDATE document SET docu_code='$up_docu_code' WHERE docu_id=$docu_id");
 
                 // Redirect to documents page
@@ -147,8 +133,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Something went wrong. Please try again later.";
             }
         }
+        // include addtran file
 				require_once '../include/addtran.php';
-
 
         // Close statement
         mysqli_stmt_close($stmt);
@@ -258,7 +244,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 												<tr>
 						                <td class="create-label <?php echo (!empty($recipient_err)) ? 'has-error' : ''; ?>">
 															<label>Recipient: </label></td>
-						          			<td><input list="recipient" class="sel-width" placeholder="Enter Name">
+						          			<td><input list="recipient" name="recipient" class="sel-width" placeholder="Enter Name">
 															<datalist id="recipient">
                       <?php
                 							// Include config file
