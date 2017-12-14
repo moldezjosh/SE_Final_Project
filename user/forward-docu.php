@@ -84,7 +84,8 @@
           if(mysqli_stmt_execute($stmt)){
             mysqli_query($link,"UPDATE recipient SET status=3 WHERE reci_id=$id AND docu_id=$docu_id");
             mysqli_query($link,"INSERT INTO recipient (docu_id, reci_id, status) VALUES ('$docu_id', '$reci_id', 2)");
-
+            // include getDuration file
+            require_once '../include/getDuration.php';
               // Redirect to documents page
               header("location: viewdocu.php?docu_id=$docu_id&from=$from");
           } else{

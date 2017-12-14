@@ -22,7 +22,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
 		// Assigning Deadline
-		$deadline = trim($_POST["deadline"]);
+		if(empty(trim($_POST["deadline"]))){
+			$deadline = "N/A";
+		}else{
+			$deadline = trim($_POST["deadline"]);
+		}
+
 
 		// Validate delivery type
 		if(empty(trim($_POST["deli_type"]))){

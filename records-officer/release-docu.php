@@ -85,12 +85,15 @@
           if(mysqli_stmt_execute($stmt)){
             mysqli_query($link,"UPDATE document SET status=2 WHERE docu_id=$docu_id");
             mysqli_query($link,"INSERT INTO recipient (docu_id, reci_id, status) VALUES ('$docu_id', '$reci_id', 2)");
+              // include getDuration file
+              require_once '../include/getDuration.php';
               // Redirect to documents page
               header("location: viewdocu.php?docu_id=$docu_id");
           } else{
               echo "Something went wrong. Please try again later.";
           }
       }
+
 
     // Close statement
     mysqli_stmt_close($stmt);

@@ -169,7 +169,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <center><h4 class="modal-title" id="myModalLabel">Upload</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Upload a PDF</h4></center>
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
@@ -179,7 +179,7 @@
 					<div class="row">
 
 						<div class="col-lg-10">
-              <input type="file" name="files" id="files" required/>
+              <input type="file" name="files" id="files" accept="application/pdf" required/>
 						</div>
 					</div>
 					<div style="height:10px;"></div>

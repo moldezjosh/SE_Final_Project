@@ -5,6 +5,7 @@ require_once 'config.php';
 
 // Check if a file has been uploaded
 if(isset($_FILES['files'])) {
+    
     // Make sure the file was sent without errors
     if($_FILES['files']['error'] == 0) {
         // get the values from the url

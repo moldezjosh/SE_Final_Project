@@ -206,7 +206,7 @@ body {
 .admin-menu li a.active { background-color: #4CAF50; color: white; }
 .admin-menu li a:hover:not(.active) { background-color: #D9D9D9; color: rgb(255,153,0);}
 .am-display { width: 748px; padding-left: 15px;}
-.menu-display { border: 1px solid rgb(255,254,159);}
+.menu-display { border: 2px solid rgb(255,254,159);}
 
 .menu-display label {
 	font-size: 14px;
@@ -332,7 +332,7 @@ body {
 	border-bottom: 1px solid rgb(153,153,153);
 }
 .user-menu {height: 241px;}
-.user-menu img { padding: 45px; border: 1px solid #FFFE9F;}
+.user-menu img { padding: 45px; border: 2px solid #FFFE9F;}
 .user-menu span { font-weight: normal; }
 
 .user-pic-label {
