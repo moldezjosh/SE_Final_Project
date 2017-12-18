@@ -71,7 +71,7 @@
 														echo "<th>Email</th>";
 														echo "<th>Office</th>";
 														echo "<th>Position</th>";
-														echo "<th>Is Admin?</th>";
+														echo "<th>Roles</th>";
 														echo "<th>Action</th>";
 												echo "</tr>";
 										while($row = mysqli_fetch_array($result)){
