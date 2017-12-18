@@ -1,3 +1,4 @@
+
 <!-- Delete User Modal-->
     <div class="modal fade" id="del<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
