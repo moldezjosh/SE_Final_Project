@@ -230,7 +230,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 								<td class="create-label <?php echo (!empty($userType_err)) ? 'has-error' : ''; ?>"><label>User Type: </label></td>
           			<td><select name="userType" class="sel-width" value="<?php echo $userType; ?>">
 									<option>(please select:)</option>
-									<option>Admin</option>
                   <option>Records Officer</option>
 									<option>User</option></select>
                   <span class="help-block"><?php echo $userType_err;?></span></td>
@@ -256,7 +255,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							</table>
 								<center><div class="update-in-pass">
 								<input type="submit" name="btnSave" class="btnOk" value="Save" />
-								<p class="btnCancel"><a href="usersetting.php">Cancel</a></p>
+								<p class="btnCancel"><a href="index.php">Cancel</a></p>
 							</div></center>
               </form>
             </div>
