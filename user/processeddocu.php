@@ -137,9 +137,9 @@
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="incomingdocu.php"><img src="../img/dashboard-icon.png" alt="dashboard-icon"><p>incoming documents</p></a></li>
-							<li><a href="processingdocu.php"><img src="../img/create-user-icon.png" alt="crate-user-icon"><p>processing documents</p></a></li>
-							<li><a href="processeddocu.php"><img src="../img/user-setting-icon.png" alt="user-setting-icon"><p>processed documents</p></a></li>
+							<li><a href="incomingdocu.php"><img src="../img/incoming-document.png" alt="incoming-docu-icon"><p>incoming documents</p></a></li>
+							<li><a href="processingdocu.php"><img src="../img/document-icon.png" alt="processing-icon"><p>processing documents</p></a></li>
+							<li><a href="processeddocu.php"><img src="../img/processed-docu.png" alt="processed-icon"><p>processed documents</p></a></li>
 						</ul>
 					</div>
 					</td>
