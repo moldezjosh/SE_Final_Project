@@ -300,9 +300,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="user-menus">
 						<h3 class="nav-header">menu</h3>
 						<ul>
-							<li><a href="adddocument.php"><img src="../img/dashboard-icon.png" alt="dashboard-icon"><p>add document</p></a></li>
-							<li><a href="documents.php"><img src="../img/create-user-icon.png" alt="crate-user-icon"><p>documents</p></a></li>
-							<li><a href="reports.php"><img src="../img/user-setting-icon.png" alt="user-setting-icon"><p>reports</p></a></li>
+							<li><a href="adddocument.php"><img src="../img/add-docu-icon.png" alt="add-docu-icon"><p>add document</p></a></li>
+							<li><a href="documents.php"><img src="../img/document.png" alt="document-icon"><p>documents</p></a></li>
+							<li><a href="reports.php"><img src="../img/dashboard-icon.png" alt="dashboard-icon"><p>reports</p></a></li>
 						</ul>
 					</div>
 					</td>
