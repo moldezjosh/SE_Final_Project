@@ -89,7 +89,7 @@
 
 								<table class="user-list" style="width: 100%">
 									<tr class="user-header">
-										<th>Transaction ID</th>
+										<th>Document Code</th>
 										<th>Type</th>
 										<th>Sender</th>
 										<th>Date</th>
