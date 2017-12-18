@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2017 at 02:39 PM
+-- Generation Time: Dec 18, 2017 at 09:33 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -58,31 +58,14 @@ INSERT INTO `document` (`docu_id`, `docu_code`, `docu_type`, `deadline`, `deli_t
 (41, '2017-DTS-IN-00041', 'For Information', '2017-12-13', 'Email', 'Brad Pitt', 'Universal Studios', 'Mary Elisse Gonzales - LS', 2, 'this is a sample document', 4, '2017-12-11 20:58:58'),
 (42, '2017-DTS-IN-00042', 'Request and Invitation', '2017-12-19', 'Hand Carry', 'Lee Ji Eun', 'LOEN Entertainment', 'Jethro Bernardo - KMD', 9, 'sample docu', 4, '2017-12-12 00:02:42'),
 (44, '2017-DTS-IN-00044', 'Request', 'N/A', 'Post Mail', 'Lee Soo Man', 'SM Entertainment', 'Jethro Bernardo - KMD', 9, 'sample', 3, '2017-12-13 16:19:22'),
-(58, '2017-DTS-IN-00058', 'For Information', 'N/A', 'Post Mail', 'Lee Sajangnim', 'LOEN Entertainment', 'Shann Kirby Locsin - LS', 10, 'sampl pls', 3, '2017-12-14 03:50:49');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `docutypes`
---
-
-CREATE TABLE `docutypes` (
-  `docuType_id` int(11) UNSIGNED NOT NULL,
-  `docu_type` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `docutypes`
---
-
-INSERT INTO `docutypes` (`docuType_id`, `docu_type`) VALUES
-(1, 'Request'),
-(2, 'Invitation'),
-(3, 'Request and Invitation'),
-(4, 'For Information'),
-(5, 'Memorandum'),
-(6, 'Purchase Requests'),
-(7, 'Job Order');
+(58, '2017-DTS-IN-00058', 'For Information', 'N/A', 'Post Mail', 'Lee Sajangnim', 'LOEN Entertainment', 'Shann Kirby Locsin - LS', 10, 'sampl pls', 4, '2017-12-14 03:50:49'),
+(59, '2017-DTS-IN-00059', 'Request and Invitation', '2017-12-19', 'Hand Carry', 'Joshua Mark', 'Sandawa', 'Jethro Bernardo - KMD', 9, 'sample', 1, '2017-12-17 21:05:27'),
+(60, '2017-DTS-IN-00060', 'Memorandum', 'N/A', 'Hand Carry', 'Jahmicah Boo', 'Buhangin', 'Mary Elisse Gonzales - LS', 2, 'sample only', 1, '2017-12-17 21:07:01'),
+(61, '2017-DTS-IN-00061', 'Request and Invitation', 'N/A', 'Hand Carry', 'Mary Claudewyn Padasas', 'Obrero Company', 'Jethro Bernardo - KMD', 9, 'sample only', 3, '2017-12-17 21:15:01'),
+(62, '2017-DTS-IN-00062', 'Job Orders', 'N/A', 'Hand Carry', 'Shann Locsin', 'Sample Address', 'Jethro Bernardo - KMD', 9, 'test', 3, '2017-12-17 21:22:24'),
+(64, '2017-DTS-IN-00064', 'Invitation', '2017-12-25', 'Email', 'Testing', 'DOST', 'Testing - FD', 16, 'Sample', 4, '2017-12-17 23:48:46'),
+(65, '2017-DTS-IN-00065', 'Request', '2017-12-20', 'Hand Carry', 'Shann Locsin', 'USeP', 'Testing - FD', 16, 'sample only', 2, '2017-12-17 23:58:23'),
+(66, '2017-DTS-IN-00066', 'For Information', '2017-12-22', 'Post Mail', 'Brad Pitt', 'USA', 'Testing - FD', 16, 'hello', 4, '2017-12-18 00:08:11');
 
 -- --------------------------------------------------------
 
@@ -106,7 +89,12 @@ CREATE TABLE `file` (
 
 INSERT INTO `file` (`file_id`, `docu_id`, `file`, `filename`, `filetype`, `filesize`, `created`) VALUES
 (21, 35, '18456-lesson01.pdf', 'lesson01.pdf', 'applicatio', 102016, '2017-12-11 16:07:00'),
-(22, 42, '23272-01 Building a simple PhoneGap application.pdf', '01 Building a simple PhoneGap application.pdf', 'applicatio', 340892, '2017-12-13 06:22:36');
+(22, 42, '23272-01 Building a simple PhoneGap application.pdf', '01 Building a simple PhoneGap application.pdf', 'applicatio', 340892, '2017-12-13 06:22:36'),
+(26, 61, '41979-NETWORK_CABLE_STANDARDS.pdf', 'NETWORK_CABLE_STANDARDS.pdf', 'applicatio', 207026, '2017-12-17 21:21:51'),
+(27, 62, '4576-NETWORK_CABLE_STANDARDS.pdf', 'NETWORK_CABLE_STANDARDS.pdf', 'applicatio', 207026, '2017-12-17 21:22:36'),
+(29, 64, '66141-Communications_and_Networking_Models_Part_2.pdf', 'Communications_and_Networking_Models_Part_2.pdf', 'applicatio', 551311, '2017-12-17 23:51:22'),
+(30, 65, '87671-4._Network_Management.pdf', '4._Network_Management.pdf', 'applicatio', 1295504, '2017-12-17 23:58:36'),
+(31, 66, '59252-Communications_and_Networking_Models_Part_2.pdf', 'Communications_and_Networking_Models_Part_2.pdf', 'applicatio', 551311, '2017-12-18 00:08:19');
 
 -- --------------------------------------------------------
 
@@ -140,8 +128,15 @@ INSERT INTO `recipient` (`reciTable_id`, `docu_id`, `reci_id`, `status`) VALUES
 (30, 41, 9, 4),
 (31, 42, 9, 4),
 (32, 44, 9, 3),
-(45, 58, 10, 3),
-(46, 58, 9, 3);
+(45, 58, 10, 4),
+(46, 58, 9, 4),
+(47, 61, 9, 3),
+(48, 62, 9, 3),
+(49, 64, 16, 4),
+(50, 65, 16, 2),
+(51, 64, 9, 4),
+(52, 66, 16, 4),
+(53, 66, 9, 4);
 
 -- --------------------------------------------------------
 
@@ -215,7 +210,29 @@ INSERT INTO `transaction` (`transact_id`, `docu_id`, `dateAdded`, `location`, `p
 (140, 42, '2017-12-14 03:58:02', 'KMD', 'Jethro Bernardo', 'N/A', 'ended', '03:49:09'),
 (141, 33, '2017-12-14 04:03:09', 'LS', 'Mary Elisse Gonzales', 'N/A', 'ended', '11:19:38'),
 (142, 35, '2017-12-14 04:04:00', 'LS', 'Mary Elisse Gonzales', 'N/A', 'ended', 'N/A'),
-(143, 37, '2017-12-14 04:05:06', 'FD', 'Mary Claude Padasas', 'N/A', 'ended', '04 day/s 13:51:35');
+(143, 37, '2017-12-14 04:05:06', 'FD', 'Mary Claude Padasas', 'N/A', 'ended', '04 day/s 13:51:35'),
+(144, 59, '2017-12-17 21:05:27', 'RO', 'Joshua Mark Barrios Moldez', 'N/A', 'N/A', 'N/A'),
+(145, 60, '2017-12-17 21:07:01', 'RO', 'Joshua Mark Barrios Moldez', 'N/A', 'N/A', 'N/A'),
+(146, 61, '2017-12-17 21:15:01', 'RO', 'Joshua Mark Barrios Moldez', 'N/A', 'N/A', 'N/A'),
+(147, 61, '2017-12-17 21:15:15', 'RO', 'Joshua Mark Barrios Moldez', 'KMD', 'forwarded to jethro', '00 day/s 00:00:13'),
+(148, 61, '2017-12-17 21:17:24', 'KMD', 'Jethro Bernardo', 'N/A', 'Document Received', '00 day/s 00:02:09'),
+(149, 62, '2017-12-17 21:22:24', 'RO', 'Joshua Mark Barrios Moldez', 'N/A', 'N/A', 'N/A'),
+(150, 62, '2017-12-17 21:23:13', 'RO', 'Joshua Mark Barrios Moldez', 'KMD', 'forwarded to jethro', '00 day/s 00:00:49'),
+(151, 62, '2017-12-17 21:24:08', 'KMD', 'Jethro Bernardo', 'N/A', 'Document Received', '00 day/s 00:00:55'),
+(152, 58, '2017-12-17 21:25:34', 'KMD', 'Jethro Bernardo', 'N/A', 'ended', '03 day/s 17:28:04'),
+(154, 64, '2017-12-17 23:48:46', 'RO', 'Record Off', 'N/A', 'N/A', 'N/A'),
+(155, 64, '2017-12-17 23:52:25', 'RO', 'Record Off', 'FD', 'please facilitate', '00 day/s 00:03:38'),
+(156, 65, '2017-12-17 23:58:23', 'RO', 'Record Off', 'N/A', 'N/A', 'N/A'),
+(157, 65, '2017-12-17 23:58:54', 'RO', 'Record Off', 'FD', 'forwarded to testing', '00 day/s 00:00:30'),
+(158, 64, '2017-12-18 00:01:46', 'FD', 'Testing', 'N/A', 'Document Received', '00 day/s 00:09:20'),
+(159, 64, '2017-12-18 00:02:07', 'FD', 'Testing', 'KMD', 'to jethro', '00 day/s 00:00:20'),
+(160, 64, '2017-12-18 00:03:25', 'FD', 'Testing', 'N/A', 'done', '00 day/s 00:01:17'),
+(161, 66, '2017-12-18 00:08:11', 'RO', 'Record Off', 'N/A', 'N/A', 'N/A'),
+(162, 66, '2017-12-18 00:08:31', 'RO', 'Record Off', 'FD', 'forwarded', '00 day/s 00:00:20'),
+(163, 66, '2017-12-18 00:08:49', 'FD', 'Testing', 'N/A', 'Document Received', '00 day/s 00:00:18'),
+(164, 66, '2017-12-18 00:09:31', 'FD', 'Testing', 'KMD', 'to jethro. end', '00 day/s 00:00:41'),
+(165, 66, '2017-12-18 00:09:45', 'KMD', 'Jethro Bernardo', 'N/A', 'Document Received', '00 day/s 00:00:14'),
+(166, 66, '2017-12-18 00:09:54', 'KMD', 'Jethro Bernardo', 'N/A', 'end document', '00 day/s 00:00:08');
 
 -- --------------------------------------------------------
 
@@ -240,13 +257,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `name`, `office`, `userType`, `position`, `password`, `created_at`) VALUES
-(2, 'maryelisse', 'maryelisse@gmail.com', 'Mary Elisse Gonzales', 'Legal Services', 'User', 'Vice-President', '$2y$10$chJtiZUtt2vacpI7..rAkuLBZwzjR93A1wOre2LtVNf4JTICjS51.', '2017-11-21 23:26:06'),
+(2, 'mryelisse', 'maryelisse@gmail.com', 'Mary Elisse G. Gonzales', 'Legal Services', 'User', 'Vice-President', '$2y$10$chJtiZUtt2vacpI7..rAkuLBZwzjR93A1wOre2LtVNf4JTICjS51.', '2017-11-21 23:26:06'),
 (6, 'joshua', 'j.markmoldez@gmail.com', 'Joshua Mark Barrios Moldez', 'Record Office', 'Records Officer', 'Records Officer', '$2y$10$wOcB6/b/bgZ7GvFI6hgg0uvnJV2D1UUTyGgmgnRcuYpXQXuI64JiC', '2017-11-29 14:34:46'),
 (7, 'admin', 'admin@gmail.com', 'Admin Name', 'Knowledge Management Division', 'Admin', 'Administratives', '$2y$10$4w1jviEAmwakcycGDHm9Wugooc4u/80B/0cwtPdOWTaZvvpAmfqE6', '2017-12-04 23:29:00'),
 (8, 'maryclaude', 'maryclaude@gmail.com', 'Mary Claude Padasas', 'Finance Division', 'User', 'Documenter', '$2y$10$oeaBe9MYWGa0yoaI87AKD.mzA05RnSxOj8kXsUyZL0rnx.Z4gm9aC', '2017-12-06 09:38:02'),
 (9, 'jethro', 'jet@gmail.com', 'Jethro Bernardo', 'Knowledge Management Division', 'User', 'Developer', '$2y$10$z0LALG/qOJFgCfGV42KlneyZk6PIrdfWv7YqwlajIw8WldfeqKKo.', '2017-12-10 18:38:25'),
 (10, 'shann03', 'shannlocsin@gmail.com', 'Shann Kirby Locsin', 'Legal Services', 'User', 'Judger', '$2y$10$CnYB2yJggf9cKlOO5LhnCuh893OhNjLWPvrMEqKKZvKOnVH1ANcxu', '2017-12-12 05:33:05'),
-(14, 'jahmboo', 'jahmicahboo@gmail.com', 'jahmicah nissi boo', 'Finance Division', 'User', 'Financer', '$2y$10$IBun7bobqya7QrejxE//9eFyl7ldZNuyWcGQR1wYQZrhcFOhi5IqG', '2017-12-12 06:40:26');
+(15, 'marny', 'marny@gmail.com', 'marnela regalado', 'Legal Services', 'User', 'Straight', '$2y$10$.3EI44iMun6lMyQmZ0vgReQLQMC/29ztCAzIPSetObg5PM7p.XjsS', '2017-12-18 06:00:31'),
+(16, 'testing', 'testing@gmail.com', 'Testing', 'Finance Division', 'User', 'Accountant', '$2y$10$SLuGk0hxfeWVenMZ1RK/tejJ7mCUE6qVdXQrSI5wfcU2w1evKx4i2', '2017-12-18 07:28:04'),
+(17, 'record', 'record@gmail.com', 'Record Off', 'Record Office', 'Records Officer', 'Records Officer', '$2y$10$YDbKd6Qmt9o1/AQXhKHaj.lkRWyxNxgGgB.L24u2/asP/FDrTK5K.', '2017-12-18 07:35:10');
 
 --
 -- Indexes for dumped tables
@@ -257,12 +276,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `name`, `office`, `userType`, `p
 --
 ALTER TABLE `document`
   ADD PRIMARY KEY (`docu_id`);
-
---
--- Indexes for table `docutypes`
---
-ALTER TABLE `docutypes`
-  ADD PRIMARY KEY (`docuType_id`);
 
 --
 -- Indexes for table `file`
@@ -297,37 +310,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
-  MODIFY `docu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
-
---
--- AUTO_INCREMENT for table `docutypes`
---
-ALTER TABLE `docutypes`
-  MODIFY `docuType_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `docu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
-  MODIFY `file_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `file_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `recipient`
 --
 ALTER TABLE `recipient`
-  MODIFY `reciTable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `reciTable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `transact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
